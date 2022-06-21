@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>Crear Actividad</title>
+    <script type="text/javascript"
+            src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js">
+    </script>
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js">
+    </script>
+
+    <script src="//code.jquery.com/jquery-1.11.1.min.js">
+    </script>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+            crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+    <div th:replace="fragments/header4 :: header"></div>
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-3 color-azul">
+            <ul class="list-group listasinseparador ml-4 font-weight-bold" style="font-size: 1.6rem;">
+                <li class="listahorizontal">Fundamentos de TI (Sección: GV2035)</li>
+                <li class="listahorizontal">Informacion General</li>
+                <li class="listahorizontal">Anuncios</li>
+                <li class="listahorizontal">Calificaciones</li>
+                <li class="listahorizontal">Consultas</li>
+                <li class="listahorizontal">Anotaciones</li>
+                <li class="listahorizontal">UNIDAD 1</li>
+                <li class="listahorizontal">Semana 1-5</li>
+            </ul>
+        </div>
+        <div class="col-9 pt-5">
+            <div class="row">
+                <div class="centrar font-weight-bold">
+                    <h1>INFORMACIÓN GENERAL</h1>
+                    <img th:src="@{/img/Discreto.png}" alt="" class="dblock centrar">
+                    <p class="dflexcentro">Discreto</p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+
+                <div class="col-11">
+                    <h4 class="font-weight-bold">Importancia del curso</h4>
+                    <h5 class="ml-5 text-center">Ut velit turpis, dignissim scelerisque purus vitae, laoreet elementum lorem. Sed egestas nibh neque, ac consequat tortor mattis ut. Sed ut aliquet sem. In luctus volutpat erat quis lacinia. Duis mattis risus lacinia, pretium dui sed,
+                        interdum massa. </h5>
+                    <br>
+                    <br>
+                    <h4 class="font-weight-bold">SÍLABO</h4>
+                    <h5 class="ml-5">Temas a tratar.docx</h5>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+
+</html>
