@@ -35,47 +35,39 @@ public class Docente implements Serializable{
 	@Column(name="apellidoMaterno", nullable = false, length = 60)
 	private String aMaterno;
 	
-	@NotEmpty(message="La contraseña es necesaria")
-	@Column(name="contrasena", nullable = false, length = 60)
-	private String contrasena;
-
+	@NotEmpty(message="Su genero es necesario")
+	@Column(name="genero", nullable = false, length = 50)
+	private String genero;
+	
 	@NotEmpty (message="Su correo es necesario")
 	@Email(message="La direcccion de correo no es valida")
 	@Column(name="correo", nullable = false, length = 60)
 	private String correo;
 	
-	@NotEmpty(message="Su genero es necesario")
-	@Column(name="genero", nullable = false, length = 50)
-	private String genero;
+	@NotEmpty(message="La contraseña es necesaria")
+	@Column(name="contrasena", nullable = false, length = 60)
+	private String contrasena;
 	
-	@NotEmpty(message="Porfavor defina su especialidad")
-	@Column(name="especialidad", nullable = false, length = 50)
+	@NotEmpty(message="Su especialidad es necesaria")
+	@Column(name="especialidad", nullable = false, length = 60)
 	private String especialidad;
 	
-	//@ManyToOne
-	//@JoinColumn(name="idEmpresa", nullable = false)
-	//private Empresa empresa;
-	
-	//@ManyToOne
-	//@JoinColumn(name="idSeccion", nullable = false)
-	//private Seccion seccion;
-
 	public Docente() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public Docente(int idDocente, String nombre, String aPaterno, String aMaterno, String genero, String correo,
-			String contrasena, String especialidad) {
+			String contrasena,String especialidad) {
 		super();
 		this.idDocente = idDocente;
 		this.nombre = nombre;
 		this.aPaterno = aPaterno;
 		this.aMaterno = aMaterno;
-		this.contrasena = contrasena;
-		this.correo = correo;
 		this.genero = genero;
-		// this.seccion = seccion;
+		this.correo = correo;
+		this.contrasena = contrasena;
+		this.especialidad = especialidad;
 	}
 
 	public int getIdDocente() {
@@ -110,14 +102,14 @@ public class Docente implements Serializable{
 		this.aMaterno = aMaterno;
 	}
 
-	public String getContrasena() {
-		return contrasena;
+	public String getGenero() {
+		return genero;
 	}
 
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
+	public void setGenero(String genero) {
+		this.genero = genero;
 	}
-	
+
 	public String getCorreo() {
 		return correo;
 	}
@@ -125,12 +117,21 @@ public class Docente implements Serializable{
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-	
-	public String getGenero() {
-			return genero;
-	}	
-	public void setGenero(String genero) {
-		this.genero = genero;
+
+	public String getContrasena() {
+		return contrasena;
+	}
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
+	}
+
+	public String getEspecialidad() {
+		return especialidad;
+	}
+
+	public void setEspecialidad(String especialidad) {
+		this.especialidad = especialidad;
 	}
 	
 }
