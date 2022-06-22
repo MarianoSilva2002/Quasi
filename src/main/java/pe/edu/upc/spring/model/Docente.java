@@ -50,13 +50,25 @@ public class Docente implements Serializable{
 	@Column(name="especialidad", nullable = false, length = 60)
 	private String especialidad;
 	
+	@NotEmpty(message="Su respuesta de seguridad es necesaria")
+	@Column(name="respuestaseguridad", nullable = false, length = 100)
+	private String respuestaseguridad;
+
+
 	public Docente() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Docente(int idDocente, String nombre, String aPaterno, String aMaterno, String genero, String correo,
-			String contrasena,String especialidad) {
+
+	public Docente(int idDocente, @NotEmpty(message = "Su nombre es necesario") String nombre,
+			@NotEmpty(message = "Su apellido P. es necesario") String aPaterno,
+			@NotEmpty(message = "Su apellido M. es necesario") String aMaterno,
+			@NotEmpty(message = "Su genero es necesario") String genero,
+			@NotEmpty(message = "Su correo es necesario") @Email(message = "La direcccion de correo no es valida") String correo,
+			@NotEmpty(message = "La contraseña es necesaria") String contrasena,
+			@NotEmpty(message = "Su especialidad es necesaria") String especialidad,
+			@NotEmpty(message = "Su respuesta de seguridad es necesaria") String respuestaseguridad) {
 		super();
 		this.idDocente = idDocente;
 		this.nombre = nombre;
@@ -66,70 +78,116 @@ public class Docente implements Serializable{
 		this.correo = correo;
 		this.contrasena = contrasena;
 		this.especialidad = especialidad;
+		this.respuestaseguridad = respuestaseguridad;
 	}
+
 
 	public int getIdDocente() {
 		return idDocente;
 	}
 
+
+
 	public void setIdDocente(int idDocente) {
 		this.idDocente = idDocente;
 	}
+
+
 
 	public String getNombre() {
 		return nombre;
 	}
 
+
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+
 
 	public String getaPaterno() {
 		return aPaterno;
 	}
 
+
+
 	public void setaPaterno(String aPaterno) {
 		this.aPaterno = aPaterno;
 	}
+
+
 
 	public String getaMaterno() {
 		return aMaterno;
 	}
 
+
+
 	public void setaMaterno(String aMaterno) {
 		this.aMaterno = aMaterno;
 	}
+
+
 
 	public String getGenero() {
 		return genero;
 	}
 
+
+
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
+
+
 
 	public String getCorreo() {
 		return correo;
 	}
 
+
+
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
+
+
 
 	public String getContrasena() {
 		return contrasena;
 	}
 
+
+
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
+
+
 
 	public String getEspecialidad() {
 		return especialidad;
 	}
 
+
+
 	public void setEspecialidad(String especialidad) {
 		this.especialidad = especialidad;
 	}
+
+
+
+	public String getRespuestaseguridad() {
+		return respuestaseguridad;
+	}
+
+
+
+	public void setRespuestaseguridad(String respuestaseguridad) {
+		this.respuestaseguridad = respuestaseguridad;
+	}
+	
+	
 	
 }
