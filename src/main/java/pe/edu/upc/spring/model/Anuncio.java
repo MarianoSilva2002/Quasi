@@ -33,10 +33,12 @@ public class Anuncio implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Anuncio(int idAnuncio, String titulo, Docente docente) {
+	public Anuncio(int idAnuncio, @NotEmpty(message = "El titulo del anuncio es necesario") String titulo,
+			@NotEmpty(message = "La descripcion del titulo es necesario") String descripcion) {
 		super();
 		this.idAnuncio = idAnuncio;
 		Titulo = titulo;
+		Descripcion = descripcion;
 	}
 
 	public int getIdAnuncio() {
@@ -62,6 +64,5 @@ public class Anuncio implements Serializable{
 	public void setDescripcion(String descripcion) {
 		Descripcion = descripcion;
 	}
-
 	
 }
