@@ -1,6 +1,7 @@
 package pe.edu.upc.spring.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="Consulta")
@@ -20,28 +22,42 @@ public class Consulta implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idConsulta;
 	
-	@NotEmpty(message="Ingresar el nombre de la consulta")
-	@Column(name="Nconsulta", nullable = false, length = 60)
-	private String Nconsulta;
+	@Column(name="NombreConsulta", nullable = true, length = 50)
+	private String NombreConsulta;
 	
-	@NotEmpty(message="La descripcion de la consulta es necesaria")
-	@Column(name="Descripcion", nullable = false, length = 200)
+	@Column(name="Descripcion", nullable = true, length = 500)
 	private String Descripcion;
 
-	@NotEmpty(message="La respuesta de la consulta es necesaria")
-	@Column(name="Respuesta", nullable = false, length = 200)
-	private String Respuesta;
+	@Column(name="FechaConsulta", nullable = true)
+	@Temporal(TemporalType.DATE)
+	private Date FechaConsulta;
+	
+	@Column(name="HoraConsulta", nullable = true)
+	@Temporal(TemporalType.TIME)
+	private Date HoraConsulta;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int Alumno_Curso_id;
+	
+	//@ManyToOne
+	//@JoinColumn(name="idAlumno_curso", nullable = true)
+	//private idAlumno_curso idAlumno_curso;
 	
 	public Consulta() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Consulta(int idConsulta, String nconsulta, String respuesta, Alumno alumno, Docente docente) {
+	public Consulta(int idConsulta, String nombreConsulta, String descripcion, Date fechaConsulta, Date horaConsulta,
+			int alumno_Curso_id) {
 		super();
 		this.idConsulta = idConsulta;
-		this.Respuesta = respuesta;
-		Nconsulta = nconsulta;
+		NombreConsulta = nombreConsulta;
+		Descripcion = descripcion;
+		FechaConsulta = fechaConsulta;
+		HoraConsulta = horaConsulta;
+		Alumno_Curso_id = alumno_Curso_id;
 	}
 
 	public int getIdConsulta() {
@@ -52,12 +68,12 @@ public class Consulta implements Serializable{
 		this.idConsulta = idConsulta;
 	}
 
-	public String getNconsulta() {
-		return Nconsulta;
+	public String getNombreConsulta() {
+		return NombreConsulta;
 	}
 
-	public void setNconsulta(String nconsulta) {
-		Nconsulta = nconsulta;
+	public void setNombreConsulta(String nombreConsulta) {
+		NombreConsulta = nombreConsulta;
 	}
 
 	public String getDescripcion() {
@@ -68,12 +84,28 @@ public class Consulta implements Serializable{
 		Descripcion = descripcion;
 	}
 
-	public String getRespuesta() {
-		return Respuesta;
+	public Date getFechaConsulta() {
+		return FechaConsulta;
 	}
 
-	public void setRespuesta(String respuesta) {
-		Respuesta = respuesta;
+	public void setFechaConsulta(Date fechaConsulta) {
+		FechaConsulta = fechaConsulta;
+	}
+
+	public Date getHoraConsulta() {
+		return HoraConsulta;
+	}
+
+	public void setHoraConsulta(Date horaConsulta) {
+		HoraConsulta = horaConsulta;
+	}
+
+	public int getAlumno_Curso_id() {
+		return Alumno_Curso_id;
+	}
+
+	public void setAlumno_Curso_id(int alumno_Curso_id) {
+		Alumno_Curso_id = alumno_Curso_id;
 	}
 	
 }

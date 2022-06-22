@@ -11,20 +11,20 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name="Seccion")
+@Table(name="Anuncio")
 public class Anuncio implements Serializable{
 	
 	private static final long serialVersionUID = 11;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idSeccion;
+	private int idAnuncio;
 	
-	@NotEmpty(message="El nombre de la seccion es necesaria")
-	@Column(name="Nombre", nullable = false, length = 60)
-	private String Nombre;
+	@NotEmpty(message="El titulo del anuncio es necesario")
+	@Column(name="Titulo", nullable = false, length = 60)
+	private String Titulo;
 	
-	@NotEmpty(message="La descripcion de la seccion es necesaria")
+	@NotEmpty(message="La descripcion del titulo es necesario")
 	@Column(name="Descripcion", nullable = false, length = 200)
 	private String Descripcion;
 
@@ -33,26 +33,26 @@ public class Anuncio implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Anuncio(int idSeccion, String nombre, Docente docente) {
+	public Anuncio(int idAnuncio, String titulo, Docente docente) {
 		super();
-		this.idSeccion = idSeccion;
-		Nombre = nombre;
+		this.idAnuncio = idAnuncio;
+		Titulo = titulo;
 	}
 
-	public int getIdSeccion() {
-		return idSeccion;
+	public int getIdAnuncio() {
+		return idAnuncio;
 	}
 
-	public void setIdSeccion(int idSeccion) {
-		this.idSeccion = idSeccion;
+	public void setIdAnuncio(int idAnuncio) {
+		this.idAnuncio = idAnuncio;
 	}
 
-	public String getNombre() {
-		return Nombre;
+	public String getTitulo() {
+		return Titulo;
 	}
 
-	public void setNombre(String nombre) {
-		Nombre = nombre;
+	public void setTitulo(String titulo) {
+		Titulo = titulo;
 	}
 
 	public String getDescripcion() {
