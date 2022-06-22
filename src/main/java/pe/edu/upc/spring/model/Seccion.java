@@ -3,11 +3,14 @@ package pe.edu.upc.spring.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -44,6 +47,10 @@ public class Seccion implements Serializable{
 	@Column(name="HoraFin", nullable = false)
 	@Temporal(TemporalType.TIME)
 	private Date HoraFin;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="idcurso")
+	private Curso idcurso; 
 
 	public Seccion() {
 		super();
@@ -54,7 +61,7 @@ public class Seccion implements Serializable{
 			@NotEmpty(message = "La cantidad de semanas de la seccion es necesaria") int cantsemanas,
 			@NotEmpty(message = "La cantidad de clases semanales de la seccion es necesaria") int cantClasessemanales,
 			@NotEmpty(message = "La hora de inicio de la seccion es necesaria") Date horaInicio,
-			@NotEmpty(message = "La hora final de la seccion es necesaria") Date horaFin) {
+			@NotEmpty(message = "La hora final de la seccion es necesaria") Date horaFin, Curso idcurso) {
 		super();
 		this.idSeccion = idSeccion;
 		Nombre = nombre;
@@ -62,6 +69,7 @@ public class Seccion implements Serializable{
 		CantClasessemanales = cantClasessemanales;
 		HoraInicio = horaInicio;
 		HoraFin = horaFin;
+		this.idcurso = idcurso;
 	}
 
 	public int getIdSeccion() {
@@ -112,5 +120,12 @@ public class Seccion implements Serializable{
 		HoraFin = horaFin;
 	}
 
+	public Curso getIdcurso() {
+		return idcurso;
+	}
+
+	public void setIdcurso(Curso idcurso) {
+		this.idcurso = idcurso;
+	}
 	
 }

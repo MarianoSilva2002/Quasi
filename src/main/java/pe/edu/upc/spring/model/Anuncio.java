@@ -3,11 +3,14 @@ package pe.edu.upc.spring.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -40,6 +43,10 @@ public class Anuncio implements Serializable{
 	@Column(name="Horaanuncio", nullable = false)
 	@Temporal(TemporalType.TIME)
 	private Date Horaanuncio;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="idcurso")
+	private Curso idcurso;
 
 	public Anuncio() {
 		super();
@@ -49,13 +56,14 @@ public class Anuncio implements Serializable{
 	public Anuncio(int idAnuncio, @NotEmpty(message = "El nombre del anuncio es necesario") String nombre,
 			@NotEmpty(message = "La descripcion del anuncio es necesario") String descripcion,
 			@NotEmpty(message = "La fecha del anuncio es necesaria") Date fechaanuncio,
-			@NotEmpty(message = "La hora del anuncio es necesaria") Date horaanuncio) {
+			@NotEmpty(message = "La hora del anuncio es necesaria") Date horaanuncio, Curso idcurso) {
 		super();
 		this.idAnuncio = idAnuncio;
 		Nombre = nombre;
 		Descripcion = descripcion;
 		Fechaanuncio = fechaanuncio;
 		Horaanuncio = horaanuncio;
+		this.idcurso = idcurso;
 	}
 
 	public int getIdAnuncio() {
@@ -98,4 +106,13 @@ public class Anuncio implements Serializable{
 		Horaanuncio = horaanuncio;
 	}
 
+	public Curso getIdcurso() {
+		return idcurso;
+	}
+
+	public void setIdcurso(Curso idcurso) {
+		this.idcurso = idcurso;
+	}
+
+	
 }

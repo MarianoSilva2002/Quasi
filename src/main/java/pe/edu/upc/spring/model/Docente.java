@@ -2,11 +2,14 @@ package pe.edu.upc.spring.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -50,6 +53,10 @@ public class Docente implements Serializable{
 	@Column(name="especialidad", nullable = false, length = 60)
 	private String especialidad;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="pregunta")
+	private Preguntas_Seguridad pregunta; 
+	
 	@NotEmpty(message="Su respuesta de seguridad es necesaria")
 	@Column(name="respuestaseguridad", nullable = false, length = 100)
 	private String respuestaseguridad;
@@ -61,13 +68,14 @@ public class Docente implements Serializable{
 	}
 
 
+
 	public Docente(int idDocente, @NotEmpty(message = "Su nombre es necesario") String nombre,
 			@NotEmpty(message = "Su apellido P. es necesario") String aPaterno,
 			@NotEmpty(message = "Su apellido M. es necesario") String aMaterno,
 			@NotEmpty(message = "Su genero es necesario") String genero,
 			@NotEmpty(message = "Su correo es necesario") @Email(message = "La direcccion de correo no es valida") String correo,
 			@NotEmpty(message = "La contraseña es necesaria") String contrasena,
-			@NotEmpty(message = "Su especialidad es necesaria") String especialidad,
+			@NotEmpty(message = "Su especialidad es necesaria") String especialidad, Preguntas_Seguridad pregunta,
 			@NotEmpty(message = "Su respuesta de seguridad es necesaria") String respuestaseguridad) {
 		super();
 		this.idDocente = idDocente;
@@ -78,8 +86,12 @@ public class Docente implements Serializable{
 		this.correo = correo;
 		this.contrasena = contrasena;
 		this.especialidad = especialidad;
+		this.pregunta = pregunta;
 		this.respuestaseguridad = respuestaseguridad;
 	}
+
+
+
 
 
 	public int getIdDocente() {
@@ -174,6 +186,18 @@ public class Docente implements Serializable{
 
 	public void setEspecialidad(String especialidad) {
 		this.especialidad = especialidad;
+	}
+
+	
+	
+	public Preguntas_Seguridad getPregunta() {
+		return pregunta;
+	}
+
+
+
+	public void setPregunta(Preguntas_Seguridad pregunta) {
+		this.pregunta = pregunta;
 	}
 
 

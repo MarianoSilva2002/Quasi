@@ -2,11 +2,14 @@ package pe.edu.upc.spring.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -32,6 +35,10 @@ public class Curso implements Serializable{
 	@Column(name="NroEvaluaciones", nullable= false)
 	private int NroEvaluaciones;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="iddocente")
+	private Docente iddocente; 
+	
 	public Curso() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -39,12 +46,13 @@ public class Curso implements Serializable{
 
 	public Curso(int idCurso, @NotEmpty(message = "Ingresar el nombre del curso") String ncurso,
 			@NotEmpty(message = "La descripcion del curso es necesaria") String descripcion,
-			@NotEmpty(message = "Ingresar la cantidad de evaluaciones") int nroEvaluaciones) {
+			@NotEmpty(message = "Ingresar la cantidad de evaluaciones") int nroEvaluaciones, Docente iddocente) {
 		super();
 		this.idCurso = idCurso;
 		Ncurso = ncurso;
 		Descripcion = descripcion;
 		NroEvaluaciones = nroEvaluaciones;
+		this.iddocente = iddocente;
 	}
 
 	public int getIdCurso() {
@@ -77,6 +85,14 @@ public class Curso implements Serializable{
 
 	public void setNroEvaluaciones(int nroEvaluaciones) {
 		NroEvaluaciones = nroEvaluaciones;
+	}
+
+	public Docente getIddocente() {
+		return iddocente;
+	}
+
+	public void setIddocente(Docente iddocente) {
+		this.iddocente = iddocente;
 	}
 
 	
