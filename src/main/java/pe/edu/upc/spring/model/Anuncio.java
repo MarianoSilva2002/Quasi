@@ -98,7 +98,4 @@ public class Anuncio implements Serializable{
 		Horaanuncio = horaanuncio;
 	}
 
-	
-
-	
 }
