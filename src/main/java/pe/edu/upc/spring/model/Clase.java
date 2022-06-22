@@ -2,11 +2,14 @@ package pe.edu.upc.spring.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -31,6 +34,10 @@ public class Clase implements Serializable{
 	@NotEmpty(message="Ingresar si habra evaluaciones en la clase es necesario")
 	@Column(name="Evaluacion", nullable = false)
 	private boolean Evaluacion;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="idseccion")
+	private Seccion idseccion; 
 
 	public Clase() {
 		super();
@@ -39,12 +46,14 @@ public class Clase implements Serializable{
 
 	public Clase(int idClase, @NotEmpty(message = "Ingresar el numero de clase") int numclase,
 			@NotEmpty(message = "La descripcion de la clase es necesaria") String descripcion,
-			@NotEmpty(message = "Ingresar si habra evaluaciones en la clase es necesario") boolean evaluacion) {
+			@NotEmpty(message = "Ingresar si habra evaluaciones en la clase es necesario") boolean evaluacion,
+			Seccion idseccion) {
 		super();
 		this.idClase = idClase;
 		Numclase = numclase;
 		Descripcion = descripcion;
 		Evaluacion = evaluacion;
+		this.idseccion = idseccion;
 	}
 
 	public int getIdClase() {
@@ -78,7 +87,14 @@ public class Clase implements Serializable{
 	public void setEvaluacion(boolean evaluacion) {
 		Evaluacion = evaluacion;
 	}
-	
+
+	public Seccion getIdseccion() {
+		return idseccion;
+	}
+
+	public void setIdseccion(Seccion idseccion) {
+		this.idseccion = idseccion;
+	}
 	
 	
 }
