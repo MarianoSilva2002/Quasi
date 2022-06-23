@@ -16,16 +16,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
-import pe.edu.upc.spring.model.Anotacion;
-import pe.edu.upc.spring.service.IAnotacionService;
+import pe.edu.upc.spring.model.Alumno;
+import pe.edu.upc.spring.model.Curso;
+import pe.edu.upc.spring.service.ICursoService;
 
 @Controller
-@RequestMapping("/anotacion")
-public class AnotacionController {
+@RequestMapping("/curso")
+public class CursoController {
 
 	
 	@Autowired
-	private IAnotacionService dService;
+	private ICursoService dService;
 	
 	
 	@RequestMapping("/bienvenido")
@@ -35,44 +36,44 @@ public class AnotacionController {
 	
 	@RequestMapping("/")
 	public String irPaginaListadoDocente(Map<String, Object> model) {
-		model.put("listaAnotacion", dService.listar());
-		return "listAnotacion"; //"listAnotacion" es una pagina del frontend
+		model.put("listaCurso", dService.listar());
+		return "listCurso"; //"listAnotacion" es una pagina del frontend
 	}
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
-		model.addAttribute("anotacion", new Anotacion());
-		return "anotacion"; //"anotacion" es una pagina del frontend para insertar y/o modificar
+		model.addAttribute("Curso", new Curso());
+		return "curso"; //"anotacion" es una pagina del frontend para insertar y/o modificar
 	}
 	
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute Anotacion objAnotacion, BindingResult binRes, Model model) throws java.text.ParseException{
+	public String registrar(@ModelAttribute Curso objAnotacion, BindingResult binRes, Model model) throws java.text.ParseException{
 		if(binRes.hasErrors())
 		{
-			return "anotacion";
+			return "curso";
 		}
 		else {
 			boolean flag = dService.grabar(objAnotacion);
 			if(flag)
-				return "redirect:/anotacion/listar";
+				return "redirect:/curso/listar";
 			else {
 				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
-				return "redirect:/anotacion/irRegistrar";
+				return "redirect:/curso/irRegistrar";
 			}
 		}
 	}
 	
 	@RequestMapping("/modificar/{id}")
 	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir) throws java.text.ParseException{
-		Optional<Anotacion> objAnotacion = dService.listarId(id);
+		Optional<Curso> objAnotacion = dService.listarId(id);
 		if(objAnotacion == null) {
 			objRedir.addFlashAttribute("mensaje","Ocurrio un roche, LUZ ROJA");
-			return "redirect:/anotacion/listar";
+			return "redirect:/curso/listar";
 		}
 		else {
 			if(objAnotacion.isPresent())
-				objAnotacion.ifPresent(o -> model.addAttribute("anotacion",o));
+				objAnotacion.ifPresent(o -> model.addAttribute("Curso",o));
 			
-			return "anotacion";
+			return "curso";
 		}
 	}
 	
@@ -81,26 +82,26 @@ public class AnotacionController {
 		try {
 			if(id!=null && id>0) {
 				dService.eliminar(id);
-				model.put("listaAnotacion", dService.listar());
+				model.put("listaCurso", dService.listar());
 			}
 		}
 		catch(Exception ex){
 			System.out.println(ex.getMessage());
 			model.put("mensaje","Ocurrio un error");
-			model.put("listaAnotacion", dService.listar());
+			model.put("listaCurso", dService.listar());
 		}
-		return "listAnotacion";
+		return "listCurso";
 	}
 	
 	@RequestMapping("/listar")
 	public String listar(Map<String, Object> model) {
-		model.put("listaAnotacion", dService.listar());
-		return "listAnotacion";
+		model.put("listaCurso", dService.listar());
+		return "listCurso";
 	}
-	
 	@RequestMapping("/listarId")
-	public String listarId(Map<String, Object> model, @ModelAttribute Anotacion anotacion) throws java.text.ParseException 
+	public String listarId(Map<String, Object> model, @ModelAttribute Curso curso) throws java.text.ParseException 
 	{
-		dService.listarId(anotacion.getIdAnotacion());
-		return "listAnotacion";
+		dService.listarId(curso.getIdCurso());
+		return "listCurso";
 	}
+
