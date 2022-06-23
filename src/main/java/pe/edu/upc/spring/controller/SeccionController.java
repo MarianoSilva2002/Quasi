@@ -16,16 +16,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
-import pe.edu.upc.spring.model.Docente;
-import pe.edu.upc.spring.service.IDocenteService;
+import pe.edu.upc.spring.model.Seccion;
+import pe.edu.upc.spring.service.ISeccionService;
 
 @Controller
-@RequestMapping("/docente")
-public class DocenteController {
+@RequestMapping("/seccion")
+public class SeccionController {
 
 	
 	@Autowired
-	private IDocenteService dService;
+	private ISeccionService dService;
 	
 	
 	@RequestMapping("/bienvenido")
@@ -34,22 +34,22 @@ public class DocenteController {
 	}
 	
 	@RequestMapping("/")
-	public String irPaginaListadoDocente(Map<String, Object> model) {
-		model.put("listaDocente", dService.listar());
-		return "listDocente"; //"listDocente" es una pagina del frontend
+	public String irPaginaListadoSeccion(Map<String, Object> model) {
+		model.put("listaSeccion", dService.listar());
+		return "listSeccion"; //"listDocente" es una pagina del frontend
 	}
 	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
-		model.addAttribute("docente", new Docente());
-		return "docente"; //"docente" es una pagina del frontend para insertar y/o modificar
+		model.addAttribute("seccion", new Seccion());
+		return "seccion"; //"Seccion" es una pagina del frontend para insertar y/o modificar
 	}
 	
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute Docente objDocente, BindingResult binRes, Model model) throws ParseException{
+	public String registrar(@ModelAttribute Seccion objDocente, BindingResult binRes, Model model) throws java.text.ParseException{
 		if(binRes.hasErrors())
 		{
-			return "docente";
+			return "seccion";
 		}
 		else {
 			boolean flag = dService.grabar(objDocente);
@@ -63,17 +63,17 @@ public class DocenteController {
 	}
 	
 	@RequestMapping("/modificar/{id}")
-	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir) throws ParseException{
-		Optional<Docente> objDocente = dService.listarId(id);
+	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir) throws java.text.ParseException{
+		Optional<Seccion> objDocente = dService.listarId(id);
 		if(objDocente == null) {
 			objRedir.addFlashAttribute("mensaje","Ocurrio un roche, LUZ ROJA");
-			return "redirect:/docente/listar";
+			return "redirect:/seccion/listar";
 		}
 		else {
 			if(objDocente.isPresent())
 				objDocente.ifPresent(o -> model.addAttribute("docente",o));
 			
-			return "docente";
+			return "seccion";
 		}
 	}
 	
@@ -82,27 +82,27 @@ public class DocenteController {
 		try {
 			if(id!=null && id>0) {
 				dService.eliminar(id);
-				model.put("listaDocente", dService.listar());
+				model.put("listaSeccion", dService.listar());
 			}
 		}
 		catch(Exception ex){
 			System.out.println(ex.getMessage());
 			model.put("mensaje","Ocurrio un error");
-			model.put("listaDocente", dService.listar());
+			model.put("listaSeccion", dService.listar());
 		}
-		return "listDocente";
+		return "listSeccion";
 	}
 	
 	@RequestMapping("/listar")
 	public String listar(Map<String, Object> model) {
-		model.put("listaDocente", dService.listar());
-		return "listDocente";
+		model.put("listaSeccion", dService.listar());
+		return "listSeccion";
 	}
 	
 	@RequestMapping("/listarId")
-	public String listarId(Map<String, Object> model, @ModelAttribute Docente docente) throws java.text.ParseException 
+	public String listarId(Map<String, Object> model, @ModelAttribute Seccion seccion) throws java.text.ParseException 
 	{
-		dService.listarId(docente.getIdDocente());
-		return "listDocente";
+		dService.listarId(seccion.getIdSeccion());
+		return "listSeccion";
 	}
 }
