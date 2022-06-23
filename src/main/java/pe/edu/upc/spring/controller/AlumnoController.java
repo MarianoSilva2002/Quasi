@@ -18,6 +18,8 @@ import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.spring.model.Alumno;
 import pe.edu.upc.spring.service.IAlumnoService;
+//import pe.edu.upc.spring.service.IAlumno_cursosService;
+//import pe.edu.upc.spring.service.IPreguntas_SeguridadService;
 
 @Controller
 @RequestMapping("/alumno")
@@ -27,6 +29,11 @@ public class AlumnoController {
 	@Autowired
 	private IAlumnoService dService;
 	
+	//@Autowired
+	//private IAlumno_cursosService cService;
+	
+	//@Autowired
+	//private IPreguntas_SeguridadService pService;
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
@@ -34,7 +41,7 @@ public class AlumnoController {
 	}
 	
 	@RequestMapping("/")
-	public String irPaginaListadoDocente(Map<String, Object> model) {
+	public String irPaginaListadoAlumno(Map<String, Object> model) {
 		model.put("listaAlumno", dService.listar());
 		return "listAlumno"; //"listAlumno" es una pagina del frontend
 	}
@@ -46,7 +53,7 @@ public class AlumnoController {
 	}
 	
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute Alumno objAlumno, BindingResult binRes, Model model) throws java.text.ParseException{
+	public String registrar(@ModelAttribute Alumno objAlumno, BindingResult binRes, Model model) throws ParseException{
 		if(binRes.hasErrors())
 		{
 			return "alumno";
@@ -63,7 +70,7 @@ public class AlumnoController {
 	}
 	
 	@RequestMapping("/modificar/{id}")
-	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir) throws java.text.ParseException{
+	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir) throws ParseException{
 		Optional<Alumno> objAlumno = dService.listarId(id);
 		if(objAlumno == null) {
 			objRedir.addFlashAttribute("mensaje","Ocurrio un roche, LUZ ROJA");
@@ -73,7 +80,7 @@ public class AlumnoController {
 			if(objAlumno.isPresent())
 				objAlumno.ifPresent(o -> model.addAttribute("alumno",o));
 			
-			return "docente";
+			return "alumno";
 		}
 	}
 	
@@ -100,7 +107,7 @@ public class AlumnoController {
 	}
 	
 	@RequestMapping("/listarId")
-	public String listarId(Map<String, Object> model, @ModelAttribute Alumno alumno) throws java.text.ParseException 
+	public String listarId(Map<String, Object> model, @ModelAttribute Alumno alumno) throws ParseException 
 	{
 		dService.listarId(alumno.getIdAlumno());
 		return "listAlumno";

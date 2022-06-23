@@ -104,4 +104,5 @@ public class CursoController {
 		dService.listarId(curso.getIdCurso());
 		return "listCurso";
 	}
+}
 
