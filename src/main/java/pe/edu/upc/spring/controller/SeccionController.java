@@ -16,16 +16,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
-import pe.edu.upc.spring.model.Anotacion;
-import pe.edu.upc.spring.service.IAnotacionService;
+import pe.edu.upc.spring.model.Seccion;
+import pe.edu.upc.spring.service.ISeccionService;
 
 @Controller
-@RequestMapping("/anotacion")
-public class AnotacionController {
+@RequestMapping("/seccion")
+public class SeccionController {
 
 	
 	@Autowired
-	private IAnotacionService dService;
+	private ISeccionService dService;
 	
 	
 	@RequestMapping("/bienvenido")
@@ -34,45 +34,46 @@ public class AnotacionController {
 	}
 	
 	@RequestMapping("/")
-	public String irPaginaListadoDocente(Map<String, Object> model) {
-		model.put("listaAnotacion", dService.listar());
-		return "listAnotacion"; //"listAnotacion" es una pagina del frontend
+	public String irPaginaListadoSeccion(Map<String, Object> model) {
+		model.put("listaSeccion", dService.listar());
+		return "listSeccion"; //"listSeccion" es una pagina del frontend
 	}
+	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
-		model.addAttribute("anotacion", new Anotacion());
-		return "anotacion"; //"anotacion" es una pagina del frontend para insertar y/o modificar
+		model.addAttribute("seccion", new Seccion());
+		return "seccion"; //"Seccion" es una pagina del frontend para insertar y/o modificar
 	}
 	
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute Anotacion objAnotacion, BindingResult binRes, Model model) throws java.text.ParseException{
+	public String registrar(@ModelAttribute Seccion objSeccion, BindingResult binRes, Model model) throws ParseException{
 		if(binRes.hasErrors())
 		{
-			return "anotacion";
+			return "seccion";
 		}
 		else {
-			boolean flag = dService.grabar(objAnotacion);
+			boolean flag = dService.grabar(objSeccion);
 			if(flag)
-				return "redirect:/anotacion/listar";
+				return "redirect:/seccion/listar";
 			else {
 				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
-				return "redirect:/anotacion/irRegistrar";
+				return "redirect:/seccion/irRegistrar";
 			}
 		}
 	}
 	
 	@RequestMapping("/modificar/{id}")
-	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir) throws java.text.ParseException{
-		Optional<Anotacion> objAnotacion = dService.listarId(id);
-		if(objAnotacion == null) {
+	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir) throws ParseException{
+		Optional<Seccion> objSeccion = dService.listarId(id);
+		if(objSeccion == null) {
 			objRedir.addFlashAttribute("mensaje","Ocurrio un roche, LUZ ROJA");
-			return "redirect:/anotacion/listar";
+			return "redirect:/seccion/listar";
 		}
 		else {
-			if(objAnotacion.isPresent())
-				objAnotacion.ifPresent(o -> model.addAttribute("anotacion",o));
+			if(objSeccion.isPresent())
+				objSeccion.ifPresent(o -> model.addAttribute("seccion",o));
 			
-			return "anotacion";
+			return "seccion";
 		}
 	}
 	
@@ -81,27 +82,27 @@ public class AnotacionController {
 		try {
 			if(id!=null && id>0) {
 				dService.eliminar(id);
-				model.put("listaAnotacion", dService.listar());
+				model.put("listaSeccion", dService.listar());
 			}
 		}
 		catch(Exception ex){
 			System.out.println(ex.getMessage());
 			model.put("mensaje","Ocurrio un error");
-			model.put("listaAnotacion", dService.listar());
+			model.put("listaSeccion", dService.listar());
 		}
-		return "listAnotacion";
+		return "listSeccion";
 	}
 	
 	@RequestMapping("/listar")
 	public String listar(Map<String, Object> model) {
-		model.put("listaAnotacion", dService.listar());
-		return "listAnotacion";
+		model.put("listaSeccion", dService.listar());
+		return "listSeccion";
 	}
 	
 	@RequestMapping("/listarId")
-	public String listarId(Map<String, Object> model, @ModelAttribute Anotacion anotacion) throws java.text.ParseException 
+	public String listarId(Map<String, Object> model, @ModelAttribute Seccion seccion) throws ParseException 
 	{
-		dService.listarId(anotacion.getIdAnotacion());
-		return "listAnotacion";
+		dService.listarId(seccion.getIdSeccion());
+		return "listSeccion";
 	}
 }
