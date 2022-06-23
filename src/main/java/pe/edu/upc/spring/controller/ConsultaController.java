@@ -16,16 +16,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
-import pe.edu.upc.spring.model.Docente;
-import pe.edu.upc.spring.service.IDocenteService;
+import pe.edu.upc.spring.model.Consulta;
+import pe.edu.upc.spring.service.IConsultaService;
 
 @Controller
-@RequestMapping("/docente")
-public class DocenteController {
+@RequestMapping("/consulta")
+public class ConsultaController {
 
 	
 	@Autowired
-	private IDocenteService dService;
+	private IConsultaService dService;
 	
 	
 	@RequestMapping("/bienvenido")
@@ -34,46 +34,46 @@ public class DocenteController {
 	}
 	
 	@RequestMapping("/")
-	public String irPaginaListadoDocente(Map<String, Object> model) {
-		model.put("listaDocente", dService.listar());
-		return "listDocente"; //"listDocente" es una pagina del frontend
+	public String irPaginaListadoConsulta(Map<String, Object> model) {
+		model.put("listaConsulta", dService.listar());
+		return "listConsulta"; //"listDocente" es una pagina del frontend
 	}
 	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
-		model.addAttribute("docente", new Docente());
-		return "docente"; //"docente" es una pagina del frontend para insertar y/o modificar
+		model.addAttribute("consulta", new Consulta());
+		return "consulta"; //"Consulta" es una pagina del frontend para insertar y/o modificar
 	}
 	
 	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute Docente objDocente, BindingResult binRes, Model model) throws ParseException{
+	public String registrar(@ModelAttribute Consulta objConsulta, BindingResult binRes, Model model) throws java.text.ParseException{
 		if(binRes.hasErrors())
 		{
-			return "docente";
+			return "consulta";
 		}
 		else {
-			boolean flag = dService.grabar(objDocente);
+			boolean flag = dService.grabar(objConsulta);
 			if(flag)
-				return "redirect:/docente/listar";
+				return "redirect:/consulta/listar";
 			else {
 				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
-				return "redirect:/docente/irRegistrar";
+				return "redirect:/consulta/irRegistrar";
 			}
 		}
 	}
 	
 	@RequestMapping("/modificar/{id}")
-	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir) throws ParseException{
-		Optional<Docente> objDocente = dService.listarId(id);
+	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir) throws java.text.ParseException{
+		Optional<Consulta> objDocente = dService.listarId(id);
 		if(objDocente == null) {
 			objRedir.addFlashAttribute("mensaje","Ocurrio un roche, LUZ ROJA");
-			return "redirect:/docente/listar";
+			return "redirect:/consulta/listar";
 		}
 		else {
 			if(objDocente.isPresent())
-				objDocente.ifPresent(o -> model.addAttribute("docente",o));
+				objDocente.ifPresent(o -> model.addAttribute("consulta",o));
 			
-			return "docente";
+			return "consulta";
 		}
 	}
 	
@@ -82,27 +82,27 @@ public class DocenteController {
 		try {
 			if(id!=null && id>0) {
 				dService.eliminar(id);
-				model.put("listaDocente", dService.listar());
+				model.put("listaConsulta", dService.listar());
 			}
 		}
 		catch(Exception ex){
 			System.out.println(ex.getMessage());
 			model.put("mensaje","Ocurrio un error");
-			model.put("listaDocente", dService.listar());
+			model.put("listaConsulta", dService.listar());
 		}
-		return "listDocente";
+		return "listConsulta";
 	}
 	
 	@RequestMapping("/listar")
 	public String listar(Map<String, Object> model) {
-		model.put("listaDocente", dService.listar());
-		return "listDocente";
+		model.put("listaConsulta", dService.listar());
+		return "listeConsulta";
 	}
 	
 	@RequestMapping("/listarId")
-	public String listarId(Map<String, Object> model, @ModelAttribute Docente docente) throws java.text.ParseException 
+	public String listarId(Map<String, Object> model, @ModelAttribute Consulta Consulta) throws java.text.ParseException 
 	{
-		dService.listarId(docente.getIdDocente());
-		return "listDocente";
+		dService.listarId(Consulta.getIdConsulta());
+		return "listConsulta";
 	}
 }
