@@ -1,4 +1,4 @@
-package pe.edu.upc.main;
+package pe.edu.upc.spring;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -7,7 +7,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(MainApplication.class);
+		return application.sources(SpringApplication.class);
 	}
 
 }
