@@ -3,14 +3,7 @@ package pe.edu.upc.main.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 @Table(name="Consulta")
@@ -35,29 +28,23 @@ public class Consulta implements Serializable{
 	@Column(name="HoraConsulta", nullable = true)
 	@Temporal(TemporalType.TIME)
 	private Date HoraConsulta;
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int Alumno_Curso_id;
-	
-	//@ManyToOne
-	//@JoinColumn(name="idAlumno_curso", nullable = true)
-	//private idAlumno_curso idAlumno_curso;
+
+	@ManyToOne
+	@JoinColumn(name="idAlumno_curso", nullable = true)
+	private Alumno_cursos idAlumno_curso;
 	
 	public Consulta() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Consulta(int idConsulta, String nombreConsulta, String descripcion, Date fechaConsulta, Date horaConsulta,
-			int alumno_Curso_id) {
-		super();
+	public Consulta(int idConsulta, String nombreConsulta, String descripcion, Date fechaConsulta, Date horaConsulta, Alumno_cursos idAlumno_curso) {
 		this.idConsulta = idConsulta;
 		NombreConsulta = nombreConsulta;
 		Descripcion = descripcion;
 		FechaConsulta = fechaConsulta;
 		HoraConsulta = horaConsulta;
-		Alumno_Curso_id = alumno_Curso_id;
+		this.idAlumno_curso = idAlumno_curso;
 	}
 
 	public int getIdConsulta() {
@@ -100,12 +87,11 @@ public class Consulta implements Serializable{
 		HoraConsulta = horaConsulta;
 	}
 
-	public int getAlumno_Curso_id() {
-		return Alumno_Curso_id;
+	public Alumno_cursos getIdAlumno_curso() {
+		return idAlumno_curso;
 	}
 
-	public void setAlumno_Curso_id(int alumno_Curso_id) {
-		Alumno_Curso_id = alumno_Curso_id;
+	public void setIdAlumno_curso(Alumno_cursos idAlumno_curso) {
+		this.idAlumno_curso = idAlumno_curso;
 	}
-	
 }

@@ -3,14 +3,7 @@ package pe.edu.upc.main.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 @Table(name="Consulta")
@@ -32,28 +25,23 @@ public class RespuestaConsultas implements Serializable{
 	@Column(name="HoraRespuesta", nullable = true)
 	@Temporal(TemporalType.TIME)
 	private Date HoraRespuesta;
+
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int Consultas_id;
-	
-	//@ManyToOne
-	//@JoinColumn(name="idAlumno_curso", nullable = true)
-	//private idAlumno_curso idAlumno_curso;
+	@ManyToOne
+	@JoinColumn(name="idConsulta", nullable = true)
+	private Consulta consulta;
 	
 	public RespuestaConsultas() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public RespuestaConsultas(int idRespuestaConsulta, String respuestaConsulta, Date fechaRespuesta,
-			Date horaRespuesta, int consultas_id) {
-		super();
+	public RespuestaConsultas(int idRespuestaConsulta, String respuestaConsulta, Date fechaRespuesta, Date horaRespuesta, Consulta consulta) {
 		this.idRespuestaConsulta = idRespuestaConsulta;
 		RespuestaConsulta = respuestaConsulta;
 		FechaRespuesta = fechaRespuesta;
 		HoraRespuesta = horaRespuesta;
-		Consultas_id = consultas_id;
+		this.consulta = consulta;
 	}
 
 	public int getIdRespuestaConsulta() {
@@ -88,12 +76,11 @@ public class RespuestaConsultas implements Serializable{
 		HoraRespuesta = horaRespuesta;
 	}
 
-	public int getConsultas_id() {
-		return Consultas_id;
+	public Consulta getConsulta() {
+		return consulta;
 	}
 
-	public void setConsultas_id(int consultas_id) {
-		Consultas_id = consultas_id;
+	public void setConsulta(Consulta consulta) {
+		this.consulta = consulta;
 	}
-	
 }
