@@ -43,17 +43,19 @@ public class CursoController {
 	
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Curso objAnotacion, BindingResult binRes, Model model) throws java.text.ParseException{
+		objAnotacion.setIddocente(DocenteController.DocenteCActiva);
 		if(binRes.hasErrors())
 		{
+			model.addAttribute("Docente", DocenteController.DocenteCActiva);
 			return "curso";
 		}
 		else {
 			boolean flag = dService.grabar(objAnotacion);
 			if(flag)
-				return "redirect:/curso/listar";
+				return "redirect:/seccion/crear";
 			else {
 				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
-				return "redirect:/curso/irRegistrar";
+				return "redirect:/curso/crear";
 			}
 		}
 	}
@@ -99,6 +101,13 @@ public class CursoController {
 	{
 		dService.listarId(curso.getIdCurso());
 		return "listCurso";
+	}
+
+	@RequestMapping("/crear")
+	public String irPaginaCrearCurso(Model model) {
+		model.addAttribute("Docente", DocenteController.DocenteCActiva);
+		model.addAttribute("Curso", new Curso());
+		return "crearcursodocente"; //"anotacion" es una pagina del frontend para insertar y/o modificar
 	}
 }
 

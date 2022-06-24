@@ -2,15 +2,7 @@ package pe.edu.upc.main.model;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -53,8 +45,8 @@ public class Docente implements Serializable{
 	@Column(name="especialidad", nullable = false, length = 60)
 	private String especialidad;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="pregunta")
+	@ManyToOne
+	@JoinColumn(name="pregunta", nullable = false)
 	private Preguntas_Seguridad pregunta; 
 	
 	@NotEmpty(message="Su respuesta de seguridad es necesaria")
@@ -90,128 +82,65 @@ public class Docente implements Serializable{
 		this.respuestaseguridad = respuestaseguridad;
 	}
 
-
-
-
-
-	public int getIdDocente() {
+	public Docente getIdDocente() {
 		return idDocente;
 	}
-
-
-
 	public void setIdDocente(int idDocente) {
 		this.idDocente = idDocente;
 	}
-
-
-
 	public String getNombre() {
 		return nombre;
 	}
-
-
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-
-
 	public String getaPaterno() {
 		return aPaterno;
 	}
-
-
-
 	public void setaPaterno(String aPaterno) {
 		this.aPaterno = aPaterno;
 	}
-
-
-
 	public String getaMaterno() {
 		return aMaterno;
 	}
-
-
-
 	public void setaMaterno(String aMaterno) {
 		this.aMaterno = aMaterno;
 	}
-
-
-
 	public String getGenero() {
 		return genero;
 	}
-
-
-
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
-
-
-
 	public String getCorreo() {
 		return correo;
 	}
-
-
-
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-
-
-
 	public String getContrasena() {
 		return contrasena;
 	}
-
-
-
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
-
-
-
 	public String getEspecialidad() {
 		return especialidad;
 	}
-
-
-
 	public void setEspecialidad(String especialidad) {
 		this.especialidad = especialidad;
 	}
-
-	
-	
 	public Preguntas_Seguridad getPregunta() {
 		return pregunta;
 	}
-
-
-
 	public void setPregunta(Preguntas_Seguridad pregunta) {
 		this.pregunta = pregunta;
 	}
-
-
-
 	public String getRespuestaseguridad() {
 		return respuestaseguridad;
 	}
-
-
-
 	public void setRespuestaseguridad(String respuestaseguridad) {
 		this.respuestaseguridad = respuestaseguridad;
 	}
-	
-	
-	
+
 }

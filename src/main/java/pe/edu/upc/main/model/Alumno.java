@@ -48,9 +48,9 @@ public class Alumno implements Serializable{
 	private String carrera;
 
 	
-	@NotEmpty(message="Porfavor ingrese la respuesta correspondiente")
-	@Column(name="RespuestaSeguridad", nullable = false, length = 100)
-	private String Respuesta_Seguridad;
+	//@NotEmpty(message="Porfavor ingrese la respuesta correspondiente")
+	@Column(name="respuestaSeguridad", nullable = false, length = 100)
+	private String respuestaSeguridad;
 	
 	@ManyToOne
 	@JoinColumn(name="Preguntas_Seguridad", nullable = false)
@@ -62,7 +62,7 @@ public class Alumno implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Alumno(int idAlumno, String nombre, String aPaterno, String aMaterno, String contrasena, String correo, String genero, String carrera, String respuesta_Seguridad, Preguntas_Seguridad idPregunta) {
+	public Alumno(int idAlumno, String nombre, String aPaterno, String aMaterno, String contrasena, String correo, String genero, String carrera, String respuestaSeguridad, Preguntas_Seguridad idPregunta) {
 		this.idAlumno = idAlumno;
 		this.nombre = nombre;
 		this.aPaterno = aPaterno;
@@ -71,7 +71,7 @@ public class Alumno implements Serializable{
 		this.correo = correo;
 		this.genero = genero;
 		this.carrera = carrera;
-		Respuesta_Seguridad = respuesta_Seguridad;
+		this.respuestaSeguridad = respuestaSeguridad;
 		this.idPregunta = idPregunta;
 	}
 
@@ -140,12 +140,12 @@ public class Alumno implements Serializable{
 	}
 
 
-	public String getRespuesta_Seguridad() {
-		return Respuesta_Seguridad;
+	public String getRespuestaSeguridad() {
+		return respuestaSeguridad;
 	}
 
-	public void setRespuesta_Seguridad(String respuesta_Seguridad) {
-		Respuesta_Seguridad = respuesta_Seguridad;
+	public void setRespuestaSeguridad(String respuestaSeguridad) {
+		this.respuestaSeguridad = respuestaSeguridad;
 	}
 
 	public Preguntas_Seguridad getIdPregunta() {
