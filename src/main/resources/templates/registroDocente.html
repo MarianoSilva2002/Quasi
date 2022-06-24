@@ -147,7 +147,7 @@
     </div>
     <br>
     <br>
-    <form th:action="@{/empleado/registrar}" th:object="${empleado}" class="justify-content-center border-0 shadow-none">
+    <form th:action="@{/docente/registrar}" th:object="${docente}" class="justify-content-center border-0 shadow-none">
         <div class="row">
             <div class="col-3"></div>
             <div class="col-md-2 color-celeste pt-3 rounded">
@@ -277,8 +277,8 @@
             <div class="col-md-1"></div>
             <div class="col-md-3 color-celeste pt-3 rounded">
                 <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
-                    <input th:field="*{Especializacion}" type="text" placeholder="Especialización..." class="form-control" th:errorclass="'form-control alert-danger'">
-                    <small class="form-text text-danger" th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></small>
+                    <input th:field="*{especialidad}" type="text" placeholder="Especialización..." class="form-control" th:errorclass="'form-control alert-danger'">
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('especialidad')}" th:errors="*{especialidad}"></small>
                 </div>
             </div>
         </div>
@@ -294,8 +294,13 @@
             <div class="col-md-1"></div>
             <div class="col-md-3 color-celeste pt-3 rounded">
                 <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
-                    <input th:field="*{genero}" type="text" placeholder="Selecciona pregunta..." class="form-control" th:errorclass="'form-control alert-danger'">
-                    <small class="form-text text-danger" th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></small>
+                    <select class="form-control" th:field="*{pregunta.idPreguntas_Seguridad}">
+                        <option th:each="p: ${listaPreguntas}"
+                                th:value="${p.idPreguntas_Seguridad}"
+                                th:text="${p.pregunta}"
+                                th:selected="(${p.idPreguntas_Seguridad}==*{pregunta.idPreguntas_Seguridad})">
+                        </option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -311,8 +316,8 @@
             <div class="col-md-1"></div>
             <div class="col-md-3 color-celeste pt-3 rounded">
                 <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
-                    <input th:field="*{genero}" type="text" placeholder="Respuesta..." class="form-control" th:errorclass="'form-control alert-danger'">
-                    <small class="form-text text-danger" th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></small>
+                    <input th:field="*{respuestaseguridad}" type="text" placeholder="Respuesta..." class="form-control" th:errorclass="'form-control alert-danger'">
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('respuestaseguridad')}" th:errors="*{respuestaseguridad}"></small>
                 </div>
             </div>
         </div>

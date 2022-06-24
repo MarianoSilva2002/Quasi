@@ -1,5 +1,6 @@
 package pe.edu.upc.main.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -15,21 +16,26 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
+import pe.edu.upc.main.model.Alumno;
 import pe.edu.upc.main.model.Docente;
+import pe.edu.upc.main.model.Preguntas_Seguridad;
 import pe.edu.upc.main.service.IDocenteService;
+import pe.edu.upc.main.service.IPreguntas_SeguridadService;
 
 @Controller
 @RequestMapping("/docente")
 public class DocenteController {
 
-	
+	@Autowired
+	private IPreguntas_SeguridadService psService;
 	@Autowired
 	private IDocenteService dService;
-	
+
+	public static Docente DocenteCActiva;
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
-		return "bienvenido"; //"bienvenido" es una pagina del frontend
+		return "menudocente"; //"bienvenido" es una pagina del frontend
 	}
 	
 	@RequestMapping("/")
@@ -40,10 +46,32 @@ public class DocenteController {
 	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
+		model.addAttribute("listaPreguntas", psService.listar());
+
+		model.addAttribute("pseguridad", new Preguntas_Seguridad());
 		model.addAttribute("docente", new Docente());
-		return "docente"; //"docente" es una pagina del frontend para insertar y/o modificar
+		return "registroDocente";
 	}
-	
+
+	@RequestMapping("/irInicioSesion")
+	public String irPaginaInicioSesion(Model model) {
+		model.addAttribute("docente", new Docente());
+		return "iniciosesionDocente";
+	}
+
+	@RequestMapping("/iniciarSesion")
+	public String iniciarSesion(@ModelAttribute Docente objDocente, BindingResult binRes, Model model) throws ParseException{
+		List<Docente> FiltroDocente = dService.buscarContrasena(objDocente.getCorreo(), objDocente.getContrasena());
+		if(FiltroDocente.isEmpty())
+		{
+			return "redirect:/docente/irInicioSesion";
+		}
+		else {
+			DocenteCActiva =FiltroDocente.get(0);
+			return "redirect:/docente/bienvenido";
+		}
+
+	}
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Docente objDocente, BindingResult binRes, Model model) throws ParseException{
 		if(binRes.hasErrors())
@@ -60,7 +88,15 @@ public class DocenteController {
 			}
 		}
 	}
-	
+
+	@RequestMapping("/editarperfil")
+	public String irPaginaEditarPerfil(Model model) {
+		model.addAttribute("listaPreguntas", psService.listar());
+
+		model.addAttribute("pseguridad", new Preguntas_Seguridad());
+		model.addAttribute("docente", DocenteCActiva);
+		return "editarperfildocente";
+	}
 	@RequestMapping("/modificar/{id}")
 	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir) throws ParseException{
 		Optional<Docente> objDocente = dService.listarId(id);

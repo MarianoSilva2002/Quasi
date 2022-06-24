@@ -10,4 +10,5 @@ public interface IAlumnoService {
 	public void eliminar(int idAlumno);
 	public Optional<Alumno> listarId(int idAlumno);
 	public List<Alumno> listar();
+	public List<Alumno> buscarContrasena(String correo, String contrasena);
 }

@@ -1,5 +1,6 @@
 package pe.edu.upc.main.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -15,19 +16,24 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
+import pe.edu.upc.main.model.Docente;
+import pe.edu.upc.main.model.Preguntas_Seguridad;
 import pe.edu.upc.main.service.IAlumnoService;
 import pe.edu.upc.main.model.Alumno;
+import pe.edu.upc.main.service.IPreguntas_SeguridadService;
 //import pe.edu.upc.spring.service.IAlumno_cursosService;
-//import pe.edu.upc.spring.service.IPreguntas_SeguridadService;
+import pe.edu.upc.main.service.IPreguntas_SeguridadService;
 
 @Controller
 @RequestMapping("/alumno")
 public class AlumnoController {
 
-	
+	@Autowired
+	private IPreguntas_SeguridadService psService;
 	@Autowired
 	private IAlumnoService dService;
-	
+
+	public static Alumno AlumnoCActiva;
 	//@Autowired
 	//private IAlumno_cursosService cService;
 	
@@ -36,7 +42,7 @@ public class AlumnoController {
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
-		return "bienvenido"; //"bienvenido" es una pagina del frontend
+		return "menualumno"; //"bienvenido" es una pagina del frontend
 	}
 	
 	@RequestMapping("/")
@@ -47,14 +53,38 @@ public class AlumnoController {
 	
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
+		model.addAttribute("listaPreguntas", psService.listar());
+
+		model.addAttribute("pseguridad", new Preguntas_Seguridad());
 		model.addAttribute("alumno", new Alumno());
-		return "alumno"; //"alumno" es una pagina del frontend para insertar y/o modificar
+		return "registroAlumno";
 	}
-	
+
+	@RequestMapping("/irInicioSesion")
+	public String irPaginaInicioSesion(Model model) {
+		model.addAttribute("alumno", new Alumno());
+		return "iniciosesionAlumno";
+	}
+
+	@RequestMapping("/iniciarSesion")
+	public String iniciarSesion(@ModelAttribute Alumno objAlumno, BindingResult binRes, Model model) throws ParseException{
+		List<Alumno> FiltroAlumno = dService.buscarContrasena(objAlumno.getCorreo(), objAlumno.getContrasena());
+		if(FiltroAlumno.isEmpty())
+		{
+			return "redirect:/alumno/irInicioSesion";
+		}
+		else {
+			AlumnoCActiva =FiltroAlumno.get(0);
+			return "redirect:/alumno/bienvenido";
+		}
+
+	}
+
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Alumno objAlumno, BindingResult binRes, Model model) throws ParseException{
 		if(binRes.hasErrors())
 		{
+			model.addAttribute("listaPreguntas", psService.listar());
 			return "alumno";
 		}
 		else {
@@ -67,7 +97,14 @@ public class AlumnoController {
 			}
 		}
 	}
-	
+	@RequestMapping("/editarperfil")
+	public String irPaginaEditarPerfil(Model model) {
+		model.addAttribute("listaPreguntas", psService.listar());
+
+		model.addAttribute("pseguridad", new Preguntas_Seguridad());
+		model.addAttribute("alumno", AlumnoCActiva);
+		return "editarperfilalumno";
+	}
 	@RequestMapping("/modificar/{id}")
 	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir) throws ParseException{
 		Optional<Alumno> objAlumno = dService.listarId(id);
