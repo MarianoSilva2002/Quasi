@@ -10,4 +10,5 @@ public interface ISeccionService {
 	public void eliminar(int idSeccion);
 	public Optional<Seccion> listarId(int idSeccion);
 	public List<Seccion> listar();
+	public List<Seccion> seccionporCurso(int curso);
 }

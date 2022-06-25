@@ -1,5 +1,6 @@
 package pe.edu.upc.main.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -16,11 +17,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
-import pe.edu.upc.main.model.Alumno;
-import pe.edu.upc.main.model.Docente;
-import pe.edu.upc.main.model.Preguntas_Seguridad;
+import pe.edu.upc.main.model.*;
+import pe.edu.upc.main.service.ICursoService;
 import pe.edu.upc.main.service.IDocenteService;
 import pe.edu.upc.main.service.IPreguntas_SeguridadService;
+import pe.edu.upc.main.service.ISeccionService;
 
 @Controller
 @RequestMapping("/docente")
@@ -31,6 +32,11 @@ public class DocenteController {
 	@Autowired
 	private IDocenteService dService;
 
+	@Autowired
+	private ICursoService cService;
+
+	@Autowired
+	private ISeccionService sService;
 	public static Docente DocenteCActiva;
 	
 	@RequestMapping("/bienvenido")
@@ -184,5 +190,22 @@ public class DocenteController {
 				return "redirect:/docente/recuperarcontrasena2";
 			}
 		}
+	}
+
+	@RequestMapping("/cursos")
+	public String irCursosDocente(Model model) {
+		List<Curso> listaCursos = cService.cursosporDocente(DocenteCActiva.getIdDocente());
+		List<Seccion> listaSecciones = new ArrayList<Seccion>();
+		for (Curso c:
+			 listaCursos) {
+			List<Seccion> secciones =sService.seccionporCurso(c.getIdCurso());
+			for (Seccion s:
+				 secciones) {
+				listaSecciones.add(s);
+			}
+		}
+		model.addAttribute("listaCursos", listaCursos);
+		model.addAttribute("listaSecciones", listaSecciones);
+		return "seccionesdocente";
 	}
 }

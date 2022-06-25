@@ -23,8 +23,9 @@ public class CursoController {
 	
 	@Autowired
 	private ICursoService dService;
-	
-	
+
+	public static Curso CursoCActiva;
+
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
 		return "bienvenido"; //"bienvenido" es una pagina del frontend
@@ -37,8 +38,8 @@ public class CursoController {
 	}
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
-		model.addAttribute("Curso", new Curso());
-		return "curso"; //"anotacion" es una pagina del frontend para insertar y/o modificar
+		model.addAttribute("curso", new Curso());
+		return "crearcursodocente"; //"anotacion" es una pagina del frontend para insertar y/o modificar
 	}
 	
 	@RequestMapping("/registrar")
@@ -47,12 +48,14 @@ public class CursoController {
 		if(binRes.hasErrors())
 		{
 			model.addAttribute("Docente", DocenteController.DocenteCActiva);
-			return "curso";
+			return "crearcursodocente";
 		}
 		else {
 			boolean flag = dService.grabar(objAnotacion);
-			if(flag)
+			if(flag){
+				CursoCActiva = objAnotacion;
 				return "redirect:/seccion/crear";
+			}
 			else {
 				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
 				return "redirect:/curso/crear";

@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="Seccion")
@@ -30,26 +31,22 @@ public class Seccion implements Serializable{
 	@Column(name="Nombre", nullable = false, length = 60)
 	private String Nombre;
 	
-	@NotEmpty(message="La cantidad de semanas de la seccion es necesaria")
 	@Column(name="Cantsemanas", nullable = false)
 	private int Cantsemanas;
 	
-	@NotEmpty(message="La cantidad de clases semanales de la seccion es necesaria")
 	@Column(name="CantClasessemanales", nullable = false)
 	private int CantClasessemanales;
 	
 	@NotEmpty(message="La hora de inicio de la seccion es necesaria")
 	@Column(name="HoraInicio", nullable = false)
-	@Temporal(TemporalType.TIME)
-	private Date HoraInicio;
+	private String HoraInicio;
 	
 	@NotEmpty(message="La hora final de la seccion es necesaria")
 	@Column(name="HoraFin", nullable = false)
-	@Temporal(TemporalType.TIME)
-	private Date HoraFin;
+	private String HoraFin;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="idcurso")
+	@ManyToOne
+	@JoinColumn(name="idcurso",nullable = false)
 	private Curso idcurso; 
 
 	public Seccion() {
@@ -58,10 +55,10 @@ public class Seccion implements Serializable{
 	}
 
 	public Seccion(int idSeccion, @NotEmpty(message = "El nombre de la seccion es necesario") String nombre,
-			@NotEmpty(message = "La cantidad de semanas de la seccion es necesaria") int cantsemanas,
-			@NotEmpty(message = "La cantidad de clases semanales de la seccion es necesaria") int cantClasessemanales,
-			@NotEmpty(message = "La hora de inicio de la seccion es necesaria") Date horaInicio,
-			@NotEmpty(message = "La hora final de la seccion es necesaria") Date horaFin, Curso idcurso) {
+			int cantsemanas,
+			int cantClasessemanales,
+			@NotEmpty(message = "La hora de inicio de la seccion es necesaria") String horaInicio,
+			@NotEmpty(message = "La hora final de la seccion es necesaria") String horaFin, Curso idcurso) {
 		super();
 		this.idSeccion = idSeccion;
 		Nombre = nombre;
@@ -104,19 +101,19 @@ public class Seccion implements Serializable{
 		CantClasessemanales = cantClasessemanales;
 	}
 
-	public Date getHoraInicio() {
+	public String getHoraInicio() {
 		return HoraInicio;
 	}
 
-	public void setHoraInicio(Date horaInicio) {
+	public void setHoraInicio(String horaInicio) {
 		HoraInicio = horaInicio;
 	}
 
-	public Date getHoraFin() {
+	public String getHoraFin() {
 		return HoraFin;
 	}
 
-	public void setHoraFin(Date horaFin) {
+	public void setHoraFin(String horaFin) {
 		HoraFin = horaFin;
 	}
 
