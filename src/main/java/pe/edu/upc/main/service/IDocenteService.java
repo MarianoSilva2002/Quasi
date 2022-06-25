@@ -12,4 +12,5 @@ public interface IDocenteService {
 	public Optional<Docente> listarId(int idDocente);
 	public List<Docente> listar();
 	public List<Docente> buscarContrasena(String correo, String contrasena);
+	public List<Docente> buscarDocenteporCorreo(String correo);
 }

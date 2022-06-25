@@ -82,7 +82,7 @@ public class Docente implements Serializable{
 		this.respuestaseguridad = respuestaseguridad;
 	}
 
-	public Docente getIdDocente() {
+	public int getIdDocente() {
 		return idDocente;
 	}
 	public void setIdDocente(int idDocente) {

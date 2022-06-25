@@ -140,4 +140,49 @@ public class DocenteController {
 		dService.listarId(docente.getIdDocente());
 		return "listDocente";
 	}
+
+	@RequestMapping("/recuperarcontrasena")
+	public String irPaginarecuperarcontrasena(Model model) {
+		model.addAttribute("listaPreguntas", psService.listar());
+		model.addAttribute("docente", new Docente());
+		return "recuperarContrasenap1d";
+	}
+
+	@RequestMapping("/recuperarcontrasena2")
+	public String reccontra1(@ModelAttribute Docente objDocente, BindingResult binRes, Model model) throws ParseException{
+		if(binRes.hasErrors())
+		{
+			model.addAttribute("listaPreguntas", psService.listar());
+			return "alumno";
+		}
+		else {
+			Docente docente = dService.buscarDocenteporCorreo(objDocente.getCorreo()).get(0);
+			if(docente.getPregunta().getIdPreguntas_Seguridad() == objDocente.getPregunta().getIdPreguntas_Seguridad() && docente.getRespuestaseguridad().equals(objDocente.getRespuestaseguridad())) {
+				model.addAttribute("listaPreguntas", psService.listar());
+				docente.setContrasena("");
+				model.addAttribute("docente", docente);
+				return "recuperarContrasenap2d";
+			}else {
+				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
+				return "redirect:/alumno/irRegistrar";
+			}
+		}
+	}
+	@RequestMapping("/recuperarcontrasena3")
+	public String reccontra2(@ModelAttribute Docente objDocente, BindingResult binRes, Model model) throws ParseException{
+		if(binRes.hasErrors())
+		{
+			model.addAttribute("listaPreguntas", psService.listar());
+			return "alumno";
+		}
+		else {
+			boolean flag = dService.grabar(objDocente);
+			if(flag)
+				return "redirect:/docente/irInicioSesion";
+			else {
+				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
+				return "redirect:/docente/recuperarcontrasena2";
+			}
+		}
+	}
 }

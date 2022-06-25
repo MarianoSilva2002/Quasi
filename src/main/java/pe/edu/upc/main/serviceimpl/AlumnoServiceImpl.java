@@ -52,4 +52,10 @@ public class AlumnoServiceImpl implements IAlumnoService {
 		return dAlumno.buscarContrasena(correo,contrasena);
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<Alumno> buscarAlumnoporCorreo(String correo) {
+		return dAlumno.buscarAlumnoporCorreo(correo);
+	}
+
 }

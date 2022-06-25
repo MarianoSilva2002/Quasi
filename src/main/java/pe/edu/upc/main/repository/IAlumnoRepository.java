@@ -14,4 +14,7 @@ import java.util.List;
 public interface IAlumnoRepository extends JpaRepository<Alumno, Integer>{
     @Query("from Alumno a where a.correo = :correo and a.contrasena = :contrasena")
     List<Alumno> buscarContrasena(@Param("correo") String correo, @Param("contrasena") String contrasena);
+
+    @Query("from Alumno a where a.correo = :correo")
+    List<Alumno> buscarAlumnoporCorreo(@Param("correo") String correo);
 }
