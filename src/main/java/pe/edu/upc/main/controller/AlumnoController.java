@@ -148,4 +148,91 @@ public class AlumnoController {
 		dService.listarId(alumno.getIdAlumno());
 		return "listAlumno";
 	}
+
+	@RequestMapping("/recuperarcontrasena")
+	public String irPaginarecuperarcontrasena(Model model) {
+		model.addAttribute("listaPreguntas", psService.listar());
+		model.addAttribute("alumno", new Alumno());
+		return "recuperarContrasenap1a";
+	}
+
+	@RequestMapping("/recuperarcontrasena2")
+	public String reccontra1(@ModelAttribute Alumno objAlumno, BindingResult binRes, Model model) throws ParseException{
+		if(binRes.hasErrors())
+		{
+			model.addAttribute("listaPreguntas", psService.listar());
+			return "alumno";
+		}
+		else {
+			Alumno alumno = dService.buscarAlumnoporCorreo(objAlumno.getCorreo()).get(0);
+			if(alumno.getIdPregunta().getIdPreguntas_Seguridad() == objAlumno.getIdPregunta().getIdPreguntas_Seguridad() && alumno.getRespuestaSeguridad().equals(objAlumno.getRespuestaSeguridad())) {
+				model.addAttribute("listaPreguntas", psService.listar());
+				alumno.setContrasena("");
+				model.addAttribute("alumno", alumno);
+				return "recuperarContrasenap2a";
+			}else {
+				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
+				return "redirect:/alumno/irRegistrar";
+			}
+		}
+	}
+	@RequestMapping("/recuperarcontrasena3")
+	public String reccontra2(@ModelAttribute Alumno objAlumno, BindingResult binRes, Model model) throws ParseException{
+
+		if(binRes.hasErrors())
+		{
+			model.addAttribute("listaPreguntas", psService.listar());
+			return "alumno";
+		}
+		else {
+			boolean flag = dService.grabar(objAlumno);
+			if(flag)
+				return "redirect:/alumno/irInicioSesion";
+			else {
+				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
+				return "redirect:/alumno/recuperarcontrasena2";
+			}
+		}
+	}
+
+	@RequestMapping("/cambiocontrasena")
+	public String irPaginacambiocontrasena(Model model) {
+		model.addAttribute("listaPreguntas", psService.listar());
+		model.addAttribute("nuevacontra", new String());
+		model.addAttribute("alumno", new Alumno());
+		return "cambiarContrasenaAlumno";
+	}
+	@RequestMapping("/cambiocontrasena2")
+	public String camcontra1(@ModelAttribute Alumno objAlumno, @ModelAttribute String objNuevaContra, BindingResult binRes, Model model) throws ParseException{
+		if(binRes.hasErrors())
+		{
+			model.addAttribute("listaPreguntas", psService.listar());
+			return "alumno";
+		}
+		else {
+			Alumno alumno = dService.buscarContrasena(objAlumno.getCorreo(),objAlumno.getContrasena()).get(0);
+			System.out.println(alumno.getCorreo());
+			System.out.println(objAlumno.getCorreo());
+			System.out.println(alumno.getContrasena());
+			System.out.println(objAlumno.getContrasena());
+			if(alumno.getCorreo().equals(objAlumno.getCorreo()))
+			{
+				System.out.println(objNuevaContra);
+				objAlumno.setContrasena(objNuevaContra);
+				System.out.println(objAlumno.getContrasena());
+				boolean flag = dService.grabar(objAlumno);
+				if(flag)
+					return "redirect:/alumno/irInicioSesion";
+				else {
+					model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
+					return "redirect:/alumno/cambiocontrasena";
+				}
+			}
+			else {
+				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
+				return "redirect:/alumno/cambiocontrasena";
+			}
+		}
+	}
+
 }

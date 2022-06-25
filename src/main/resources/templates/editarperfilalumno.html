@@ -162,15 +162,7 @@
             <br>
             <form th:action="@{/alumno/modificar}" th:object="${alumno}" class=" justify-content-center border-0 shadow-none">
                 <div class="row invisible">
-                    <div class="col-3"></div>
-                    <div class="col-md-2 color-celeste pt-3 rounded">
-
-                        <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
-                            <p class="pb-3">Contraseña</p>
-                        </div>
-                    </div>
-                    <div class="col-md-1"></div>
-                    <div class="col-md-3 color-celeste pt-3 rounded">
+                    <div class="col-1 color-celeste pt-3 rounded">
                         <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
                             <input th:field="*{idAlumno}" type="text" placeholder="Contraseña..." class="form-control" th:errorclass="'form-control alert-danger'">
                         </div>

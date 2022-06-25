@@ -136,69 +136,88 @@
 </head>
 
 <body>
-    <div th:replace="fragments/header3 :: header"></div>
-    <br>
-    <br>
+<div th:replace="fragments/header2 :: header"></div>
 
-    <div class="row">
-        <div class="col-3 color-azul">
-            <div th:replace="fragments/lateralizqalumno :: header"></div>
+    <div class="row py-3">
+        <div class="col"></div>
+        <div class="col dflexcentro">
+            <img class="img-fluid align-middle" th:src="@{/img/Quasi.png}" alt="Logo de Quasi">
         </div>
-        <div class="col-9 pt-5">
-            <div class="row">
-                <div class="centrar font-weight-bold">
-                    <h1>REGISTRAR CONSULTA</h1>
+        <div class="col"></div>
+    </div>
+
+    <br>
+    <br>
+    <form th:action="@{/alumno/recuperarcontrasena2}" th:object="${alumno}" class=" justify-content-center border-0 shadow-none">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-md-2 color-celeste pt-3 rounded">
+
+                <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
+                    <p class="pb-3">Correo</p>
                 </div>
             </div>
-            <br>
-            <!-- Button to Open the Modal -->
-            <button type="button" class="btn btn-primary invisible" data-toggle="modal" data-target="#myModal">
-             Open modal
-            </button>
+            <div class="col-md-1"></div>
+            <div class="col-md-3 color-celeste pt-3 rounded">
+                <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
+                    <input th:field="*{correo}" type="text" placeholder="Correo" class="form-control" name="uname" required>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-md-2 color-celeste pt-3 rounded">
 
-            <!-- The Modal -->
-            <div class="modal" id="myModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                            <div class="container">
-                                <img th:src="@{/img/Alerta.png}" class="dblock centrar">
-                                <h6 class="dflexcentro">No se llenaron los campos requeridos</h6>
-                                <button type="button" class="btn btn-danger rounded dblock centrar" data-dismiss="modal">Cerrar</button>
-                            </div>
-                        </div>
-
+                <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
+                    <p class="pb-3">Pregunta de seguridad</p>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3 color-celeste pt-3 rounded">
+                <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
+                    <div class="form-group">
+                        <select class="form-control" th:field="*{idPregunta.idPreguntas_Seguridad}">
+                            <option th:each="p: ${listaPreguntas}"
+                                    th:value="${p.idPreguntas_Seguridad}"
+                                    th:text="${p.pregunta}"
+                                    th:selected="(${p.idPreguntas_Seguridad}==*{idPregunta.idPreguntas_Seguridad})">
+                            </option>
+                        </select>
                     </div>
                 </div>
             </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-md-2 color-celeste pt-3 rounded">
 
-            <div class="row mb-5">
-                <div class="col"></div>
-                <div class="col-10 color-verde-claro centrarvh">
-                    <h4 class="mt-2">Nombre de consulta <span class="rojo">*</span></h4>
-                    <p class="mt-2 ml-2 color-blanco2 p-2">Nombre</p>
-                    <h4 class="mt-2">Descripción de consulta <span class="rojo">*</span></h4>
-                    <p class="mt-2 ml-2 color-blanco2 p-2">¿Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sem eros, porta tempor vestibulum ut, aliquet ut sapien. Nam sed urna malesuada, consequat leo in, finibus risus. Suspendisse potenti.?</p>
+                <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
+                    <p class="pb-3">Tu Respuesta</p>
                 </div>
-                <div class="col"></div>
             </div>
-
-            <div class="row">
-                <div class="col-3 p-4">
-                    <button type="submit" class="btn btn-block bg-danger text-white rounded">Cancelar
-                    </button>
+            <div class="col-md-1"></div>
+            <div class="col-md-3 color-celeste pt-3 rounded">
+                <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
+                    <input th:field="*{respuestaSeguridad}" type="text" id="confirm_password" placeholder="Respuesta..." class="form-control" required>
                 </div>
-                <div class="col"></div>
-                <div class="col-3 p-4 dflex align-content-end">
-                    <button type="submit" class="btn btn-block color-celeste text-white rounded">Agregar
-                        </button>
-                </div>
-                <div class="col-1"></div>
             </div>
         </div>
-    </div>
+        <br>
+
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-3 p-4 dflexcentro">
+                <button type="submit" class="btn btn-block color-azul-oscuro text-white rounded">Validar
+                    </button>
+            </div>
+            <div class="col"></div>
+        </div>
+    </form>
+
+    <br>
+    <br>
     <div th:replace="fragments/footer :: footer"></div>
 </body>
 

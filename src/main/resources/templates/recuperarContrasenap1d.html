@@ -148,7 +148,23 @@
 
     <br>
     <br>
-    <form th:action="@{/empleado/iniciarSesion}" th:object="${empleado}" class=" justify-content-center border-0 shadow-none">
+    <form th:action="@{/docente/recuperarcontrasena2}" th:object="${docente}" class=" justify-content-center border-0 shadow-none">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-md-2 color-celeste pt-3 rounded">
+
+                <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
+                    <p class="pb-3">Correo</p>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3 color-celeste pt-3 rounded">
+                <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
+                    <input th:field="*{correo}" type="text" placeholder="Correo" class="form-control" name="uname" required>
+                </div>
+            </div>
+        </div>
+        <br>
         <div class="row">
             <div class="col-3"></div>
             <div class="col-md-2 color-celeste pt-3 rounded">
@@ -160,7 +176,13 @@
             <div class="col-md-1"></div>
             <div class="col-md-3 color-celeste pt-3 rounded">
                 <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
-                    <input th:field="*{correo}" type="text" placeholder="Pregunta de seguridad..." class="form-control" name="uname" required>
+                    <select class="form-control" th:field="*{pregunta.idPreguntas_Seguridad}">
+                        <option th:each="p: ${listaPreguntas}"
+                                th:value="${p.idPreguntas_Seguridad}"
+                                th:text="${p.pregunta}"
+                                th:selected="(${p.idPreguntas_Seguridad}==*{pregunta.idPreguntas_Seguridad})">
+                        </option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -176,7 +198,7 @@
             <div class="col-md-1"></div>
             <div class="col-md-3 color-celeste pt-3 rounded">
                 <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
-                    <input th:field="*{contrasena}" type="text" id="confirm_password" placeholder="Inserte Contraseña..." class="form-control" required>
+                    <input th:field="*{respuestaseguridad}" type="text" id="confirm_password" placeholder="Respuesta..." class="form-control" required>
                 </div>
             </div>
         </div>
