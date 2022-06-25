@@ -45,5 +45,10 @@ public class SeccionServiceImpl implements ISeccionService{
 	public List<Seccion> listar() {
 		return dSeccion.findAll();
 	}
-	
+
+	@Override
+	public List<Seccion> seccionporCurso(int curso) {
+		return dSeccion.seccionporCurso(curso);
+	}
+
 }

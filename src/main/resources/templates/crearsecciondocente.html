@@ -147,7 +147,7 @@
 
     <br>
     <br>
-    <form th:action="@{/empleado/iniciarSesion}" th:object="${empleado}" class=" justify-content-center border-0 shadow-none">
+    <form th:action="@{/seccion/registrar}" th:object="${seccion}" class=" justify-content-center border-0 shadow-none">
         <div class="row">
             <div class="col-3"></div>
             <div class="col-md-2 color-azul2 pt-3 rounded">
@@ -159,7 +159,7 @@
             <div class="col-md-1"></div>
             <div class="col-md-3 color-azul2 pt-3 rounded">
                 <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
-                    <input th:field="*{correo}" type="text" placeholder="Código de la sección..." class="form-control" name="uname" required>
+                    <input th:field="*{nombre}" type="text" placeholder="Código de la sección..." class="form-control" name="uname" required>
                 </div>
             </div>
         </div>
@@ -175,7 +175,7 @@
             <div class="col-md-1"></div>
             <div class="col-md-3 color-azul2 pt-3 rounded">
                 <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
-                    <input th:field="*{contrasena}" type="number" id="confirm_password" placeholder="Cantidad" class="form-control" required>
+                    <input th:field="*{cantsemanas}" type="number" placeholder="Cantidad" class="form-control" required>
                 </div>
             </div>
         </div>
@@ -191,7 +191,7 @@
             <div class="col-md-1"></div>
             <div class="col-md-3 color-azul2 pt-3 rounded">
                 <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
-                    <input th:field="*{contrasena}" type="number" id="confirm_password" placeholder="Cantidad" class="form-control" required>
+                    <input th:field="*{cantClasessemanales}" type="number"  placeholder="Cantidad" class="form-control" required>
                 </div>
             </div>
         </div>
@@ -201,13 +201,29 @@
             <div class="col-md-2 color-azul2 pt-3 rounded">
 
                 <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
-                    <p class="pb-3">Horario de clases</p>
+                    <p class="pb-3">Horario de clases (Inicio)</p>
                 </div>
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-3 color-azul2 pt-3 rounded">
                 <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
-                    <input th:field="*{contrasena}" type="time" id="confirm_password" placeholder="Hora de clases" class="form-control" required>
+                    <input th:field="*{horaInicio}" type="text" placeholder="Hora de clases" class="form-control" required>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-md-2 color-azul2 pt-3 rounded">
+
+                <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
+                    <p class="pb-3">Horario de clases (Fin)</p>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3 color-azul2 pt-3 rounded">
+                <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
+                    <input th:field="*{horaFin}" type="text" placeholder="Hora de clases" class="form-control" required>
                 </div>
             </div>
         </div>
@@ -215,8 +231,8 @@
         <div class="row">
             <div class="col"></div>
             <div class="col-3 p-4 dflexcentro">
-                <button type="submit" class="btn btn-block color-celeste text-white rounded">Plan Calendario
-                    </button>
+                <a class="btn btn-block color-celeste text-white rounded">Plan Calendario
+                    </a>
             </div>
             <div class="col-3 p-4 dflexcentro">
                 <button type="submit" class="btn btn-block color-celeste text-white rounded">Agregar
@@ -227,13 +243,12 @@
         <div class="row">
             <div class="col-4"></div>
             <div class="col-4 p-4 dflexcentro">
-                <button type="submit" class="btn btn-block color-celeste text-white rounded">Crear
-                    </button>
+                <a th:href="@{/docente/bienvenido}" class="btn btn-block color-celeste text-white rounded">Crear
+                </a>
             </div>
             <div class="col-4"></div>
         </div>
     </form>
-
     <br>
     <br>
     <div th:replace="fragments/footer :: footer"></div>

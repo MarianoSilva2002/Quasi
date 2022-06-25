@@ -137,7 +137,8 @@
 
 <body>
     <div th:replace="fragments/header4 :: header"></div>
-
+    <br>
+    <br>
     <div class="row py-3">
         <div class="centrar">
             <h1 class="font-weight-bold">CREAR CURSO</h1>
@@ -158,7 +159,7 @@
             <div class="col-md-1"></div>
             <div class="col-md-3 color-azul2 pt-3 rounded">
                 <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
-                    <input th:field="*{NCurso}" type="text" placeholder="Nombre del curso..." class="form-control" name="uname" required>
+                    <input th:field="*{nCurso}" type="text" placeholder="Nombre del curso..." class="form-control" name="uname" required>
                 </div>
             </div>
         </div>
@@ -190,7 +191,7 @@
             <div class="col-md-1"></div>
             <div class="col-md-3 color-azul2 pt-3 rounded">
                 <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
-                    <input th:field="*{NroEvaluaciones}" type="number" placeholder="Cantidad" class="form-control" required>
+                    <input th:field="*{nroEvaluaciones}" type="number" placeholder="Cantidad" class="form-control" required>
                 </div>
             </div>
         </div>
