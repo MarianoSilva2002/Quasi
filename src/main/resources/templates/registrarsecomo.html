@@ -16,7 +16,104 @@
 
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/all.min.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        * {
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        #header {
+            background-image: url(../img/background.jpg);
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+        }
+
+        .form {
+            font-family: 'Lato', sans-serif;
+        }
+
+        .color-azul-oscuro {
+            background-color: #0E185F;
+        }
+
+        .color-azul {
+            background-color: #2FA4FF;
+        }
+
+        .color-azul2 {
+            background-color: #00C2FF;
+        }
+
+        .color-celeste {
+            background-color: #00FFDD;
+        }
+
+        .color-verde-claro {
+            background-color: #E8FFC2;
+        }
+
+        .color-blanco2 {
+            background-color: #F4F8FA;
+        }
+
+        .rojo {
+            color: red;
+        }
+
+        .color-amarillo {
+            background-color: #FFCC4D;
+        }
+
+        .color-naranja {
+            background-color: #F98600;
+        }
+
+        .dflexcentro {
+            display: flex;
+            justify-content: center;
+        }
+
+        .dflex {
+            display: flex;
+        }
+
+        .dblock {
+            display: block;
+        }
+
+        .centrar {
+            margin: 0 auto;
+        }
+
+        .centrarv {
+            margin: auto 0;
+        }
+
+        .centrarvh {
+            margin: auto;
+        }
+
+        .textopequeno {
+            font-size: 13px;
+        }
+
+        .listahorizontal {
+            padding-top: 1.5rem;
+            padding-bottom: 0rem;
+        }
+
+        .listasinseparador {
+            list-style-type: none;
+        }
+
+        .derecha {
+            float: right;
+        }
+
+        .curso {
+            width: 100%;
+        }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
@@ -74,7 +171,7 @@
         <br> <br>
         <div class="row">
             <div class="col-6 dflexcentro">
-                <form th:action="@{/empleado/irRegistrar}" class="justify-content-center border-0 shadow-none">
+                <form th:action="@{/alumno/irRegistrar}" class="justify-content-center border-0 shadow-none">
                     <button type="submit" class="btn btn-lg color-celeste rounded" style="height: 50px;">
                             <div class="bg-white text-black font-weight-bold rounded text-center">
                                 <p>Alumno</p>
@@ -83,7 +180,7 @@
                 </form>
             </div>
             <div class="col-6 dflexcentro">
-                <form th:action="@{/jefe/irRegistrar}" class="justify-content-center border-0 shadow-none">
+                <form th:action="@{/docente/irRegistrar}" class="justify-content-center border-0 shadow-none">
                     <button type="submit" class="btn btn-lg color-celeste rounded" style="height: 50px;">
                             <div class="bg-white text-black font-weight-bold rounded text-center">
                                 <p>Docente</p>

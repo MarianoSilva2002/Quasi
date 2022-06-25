@@ -45,5 +45,17 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	public List<Alumno> listar() {
 		return dAlumno.findAll();
 	}
-	
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Alumno> buscarContrasena(String correo, String contrasena) {
+		return dAlumno.buscarContrasena(correo,contrasena);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Alumno> buscarAlumnoporCorreo(String correo) {
+		return dAlumno.buscarAlumnoporCorreo(correo);
+	}
+
 }

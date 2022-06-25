@@ -16,7 +16,104 @@
 
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/all.min.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        * {
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        #header {
+            background-image: url(../img/background.jpg);
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+        }
+
+        .form {
+            font-family: 'Lato', sans-serif;
+        }
+
+        .color-azul-oscuro {
+            background-color: #0E185F;
+        }
+
+        .color-azul {
+            background-color: #2FA4FF;
+        }
+
+        .color-azul2 {
+            background-color: #00C2FF;
+        }
+
+        .color-celeste {
+            background-color: #00FFDD;
+        }
+
+        .color-verde-claro {
+            background-color: #E8FFC2;
+        }
+
+        .color-blanco2 {
+            background-color: #F4F8FA;
+        }
+
+        .rojo {
+            color: red;
+        }
+
+        .color-amarillo {
+            background-color: #FFCC4D;
+        }
+
+        .color-naranja {
+            background-color: #F98600;
+        }
+
+        .dflexcentro {
+            display: flex;
+            justify-content: center;
+        }
+
+        .dflex {
+            display: flex;
+        }
+
+        .dblock {
+            display: block;
+        }
+
+        .centrar {
+            margin: 0 auto;
+        }
+
+        .centrarv {
+            margin: auto 0;
+        }
+
+        .centrarvh {
+            margin: auto;
+        }
+
+        .textopequeno {
+            font-size: 13px;
+        }
+
+        .listahorizontal {
+            padding-top: 1.5rem;
+            padding-bottom: 0rem;
+        }
+
+        .listasinseparador {
+            list-style-type: none;
+        }
+
+        .derecha {
+            float: right;
+        }
+
+        .curso {
+            width: 100%;
+        }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
@@ -45,16 +142,7 @@
 
     <div class="row">
         <div class="col-3 color-azul">
-            <ul class="list-group listasinseparador ml-4 font-weight-bold" style="font-size: 1.6rem;">
-                <li class="listahorizontal">Fundamentos de TI (Sección: GV2035)</li>
-                <li class="listahorizontal">Informacion General</li>
-                <li class="listahorizontal">Anuncios</li>
-                <li class="listahorizontal">Calificaciones</li>
-                <li class="listahorizontal">Consultas</li>
-                <li class="listahorizontal">Anotaciones</li>
-                <li class="listahorizontal">UNIDAD 1</li>
-                <li class="listahorizontal">Semana 1-5</li>
-            </ul>
+            <div th:replace="fragments/lateralizqdocente :: header"></div>
         </div>
         <div class="col-9 pt-5">
             <div class="row">

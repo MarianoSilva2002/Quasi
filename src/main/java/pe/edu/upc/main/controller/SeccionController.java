@@ -1,5 +1,6 @@
 package pe.edu.upc.main.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,25 +40,26 @@ public class SeccionController {
 		return "listSeccion"; //"listSeccion" es una pagina del frontend
 	}
 	
-	@RequestMapping("/irRegistrar")
+	@RequestMapping("/crear")
 	public String irPaginaRegistrar(Model model) {
 		model.addAttribute("seccion", new Seccion());
-		return "seccion"; //"Seccion" es una pagina del frontend para insertar y/o modificar
+		return "crearsecciondocente";
 	}
 	
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Seccion objSeccion, BindingResult binRes, Model model) throws ParseException{
+		objSeccion.setIdcurso(CursoController.CursoCActiva);
 		if(binRes.hasErrors())
 		{
-			return "seccion";
+			return "crearsecciondocente";
 		}
 		else {
 			boolean flag = dService.grabar(objSeccion);
 			if(flag)
-				return "redirect:/seccion/listar";
+				return "redirect:/seccion/crear";
 			else {
 				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
-				return "redirect:/seccion/irRegistrar";
+				return "redirect:/seccion/crear";
 			}
 		}
 	}

@@ -16,7 +16,104 @@
 
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/all.min.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        * {
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        #header {
+            background-image: url(../img/background.jpg);
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+        }
+
+        .form {
+            font-family: 'Lato', sans-serif;
+        }
+
+        .color-azul-oscuro {
+            background-color: #0E185F;
+        }
+
+        .color-azul {
+            background-color: #2FA4FF;
+        }
+
+        .color-azul2 {
+            background-color: #00C2FF;
+        }
+
+        .color-celeste {
+            background-color: #00FFDD;
+        }
+
+        .color-verde-claro {
+            background-color: #E8FFC2;
+        }
+
+        .color-blanco2 {
+            background-color: #F4F8FA;
+        }
+
+        .rojo {
+            color: red;
+        }
+
+        .color-amarillo {
+            background-color: #FFCC4D;
+        }
+
+        .color-naranja {
+            background-color: #F98600;
+        }
+
+        .dflexcentro {
+            display: flex;
+            justify-content: center;
+        }
+
+        .dflex {
+            display: flex;
+        }
+
+        .dblock {
+            display: block;
+        }
+
+        .centrar {
+            margin: 0 auto;
+        }
+
+        .centrarv {
+            margin: auto 0;
+        }
+
+        .centrarvh {
+            margin: auto;
+        }
+
+        .textopequeno {
+            font-size: 13px;
+        }
+
+        .listahorizontal {
+            padding-top: 1.5rem;
+            padding-bottom: 0rem;
+        }
+
+        .listasinseparador {
+            list-style-type: none;
+        }
+
+        .derecha {
+            float: right;
+        }
+
+        .curso {
+            width: 100%;
+        }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
@@ -51,7 +148,23 @@
 
     <br>
     <br>
-    <form th:action="@{/empleado/iniciarSesion}" th:object="${empleado}" class=" justify-content-center border-0 shadow-none">
+    <form th:action="@{/alumno/recuperarcontrasena2}" th:object="${alumno}" class=" justify-content-center border-0 shadow-none">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-md-2 color-celeste pt-3 rounded">
+
+                <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
+                    <p class="pb-3">Correo</p>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3 color-celeste pt-3 rounded">
+                <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
+                    <input th:field="*{correo}" type="text" placeholder="Correo" class="form-control" name="uname" required>
+                </div>
+            </div>
+        </div>
+        <br>
         <div class="row">
             <div class="col-3"></div>
             <div class="col-md-2 color-celeste pt-3 rounded">
@@ -63,7 +176,15 @@
             <div class="col-md-1"></div>
             <div class="col-md-3 color-celeste pt-3 rounded">
                 <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
-                    <input th:field="*{correo}" type="text" placeholder="Pregunta de seguridad..." class="form-control" name="uname" required>
+                    <div class="form-group">
+                        <select class="form-control" th:field="*{idPregunta.idPreguntas_Seguridad}">
+                            <option th:each="p: ${listaPreguntas}"
+                                    th:value="${p.idPreguntas_Seguridad}"
+                                    th:text="${p.pregunta}"
+                                    th:selected="(${p.idPreguntas_Seguridad}==*{idPregunta.idPreguntas_Seguridad})">
+                            </option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
@@ -79,7 +200,7 @@
             <div class="col-md-1"></div>
             <div class="col-md-3 color-celeste pt-3 rounded">
                 <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
-                    <input th:field="*{contrasena}" type="text" id="confirm_password" placeholder="Inserte Contraseña..." class="form-control" required>
+                    <input th:field="*{respuestaSeguridad}" type="text" id="confirm_password" placeholder="Respuesta..." class="form-control" required>
                 </div>
             </div>
         </div>

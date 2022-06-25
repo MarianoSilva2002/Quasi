@@ -16,7 +16,104 @@
 
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/all.min.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        * {
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        #header {
+            background-image: url(../img/background.jpg);
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+        }
+
+        .form {
+            font-family: 'Lato', sans-serif;
+        }
+
+        .color-azul-oscuro {
+            background-color: #0E185F;
+        }
+
+        .color-azul {
+            background-color: #2FA4FF;
+        }
+
+        .color-azul2 {
+            background-color: #00C2FF;
+        }
+
+        .color-celeste {
+            background-color: #00FFDD;
+        }
+
+        .color-verde-claro {
+            background-color: #E8FFC2;
+        }
+
+        .color-blanco2 {
+            background-color: #F4F8FA;
+        }
+
+        .rojo {
+            color: red;
+        }
+
+        .color-amarillo {
+            background-color: #FFCC4D;
+        }
+
+        .color-naranja {
+            background-color: #F98600;
+        }
+
+        .dflexcentro {
+            display: flex;
+            justify-content: center;
+        }
+
+        .dflex {
+            display: flex;
+        }
+
+        .dblock {
+            display: block;
+        }
+
+        .centrar {
+            margin: 0 auto;
+        }
+
+        .centrarv {
+            margin: auto 0;
+        }
+
+        .centrarvh {
+            margin: auto;
+        }
+
+        .textopequeno {
+            font-size: 13px;
+        }
+
+        .listahorizontal {
+            padding-top: 1.5rem;
+            padding-bottom: 0rem;
+        }
+
+        .listasinseparador {
+            list-style-type: none;
+        }
+
+        .derecha {
+            float: right;
+        }
+
+        .curso {
+            width: 100%;
+        }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
@@ -41,8 +138,7 @@
 <body>
 <div th:replace="fragments/header2 :: header"></div>
 
-
-<div class="row py-3">
+    <div class="row py-3">
         <div class="col"></div>
         <div class="col dflexcentro">
             <img class="img-fluid align-middle" th:src="@{/img/Quasi.png}" alt="Logo de Quasi">
@@ -52,19 +148,19 @@
 
     <br>
     <br>
-    <form th:action="@{/empleado/iniciarSesion}" th:object="${empleado}" class=" justify-content-center border-0 shadow-none">
+    <form th:action="@{/docente/recuperarcontrasena2}" th:object="${docente}" class=" justify-content-center border-0 shadow-none">
         <div class="row">
             <div class="col-3"></div>
             <div class="col-md-2 color-celeste pt-3 rounded">
 
                 <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
-                    <p class="pb-3">Nueva contraseña</p>
+                    <p class="pb-3">Correo</p>
                 </div>
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-3 color-celeste pt-3 rounded">
                 <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
-                    <input th:field="*{correo}" type="text" placeholder="Pregunta de seguridad..." class="form-control" name="uname" required>
+                    <input th:field="*{correo}" type="text" placeholder="Correo" class="form-control" name="uname" required>
                 </div>
             </div>
         </div>
@@ -74,13 +170,35 @@
             <div class="col-md-2 color-celeste pt-3 rounded">
 
                 <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
-                    <p class="pb-3">Confirmar nueva contraseña</p>
+                    <p class="pb-3">Pregunta de seguridad</p>
                 </div>
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-3 color-celeste pt-3 rounded">
                 <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
-                    <input th:field="*{contrasena}" type="text" id="confirm_password" placeholder="Inserte Contraseña..." class="form-control" required>
+                    <select class="form-control" th:field="*{pregunta.idPreguntas_Seguridad}">
+                        <option th:each="p: ${listaPreguntas}"
+                                th:value="${p.idPreguntas_Seguridad}"
+                                th:text="${p.pregunta}"
+                                th:selected="(${p.idPreguntas_Seguridad}==*{pregunta.idPreguntas_Seguridad})">
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-md-2 color-celeste pt-3 rounded">
+
+                <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
+                    <p class="pb-3">Tu Respuesta</p>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3 color-celeste pt-3 rounded">
+                <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
+                    <input th:field="*{respuestaseguridad}" type="text" id="confirm_password" placeholder="Respuesta..." class="form-control" required>
                 </div>
             </div>
         </div>
@@ -89,7 +207,7 @@
         <div class="row">
             <div class="col"></div>
             <div class="col-3 p-4 dflexcentro">
-                <button type="submit" class="btn btn-block color-azul-oscuro text-white rounded">Guardar
+                <button type="submit" class="btn btn-block color-azul-oscuro text-white rounded">Validar
                     </button>
             </div>
             <div class="col"></div>

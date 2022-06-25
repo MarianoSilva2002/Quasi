@@ -45,5 +45,16 @@ public class DocenteServiceImpl implements IDocenteService{
 	public List<Docente> listar() {
 		return dDocente.findAll();
 	}
-	
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Docente> buscarContrasena(String correo, String contrasena) {
+		return dDocente.buscarContrasena(correo,contrasena);
+	}
+	@Override
+	@Transactional(readOnly = true)
+	public List<Docente> buscarDocenteporCorreo(String correo) {
+		return dDocente.buscarDocenteporCorreo(correo);
+	}
+
 }

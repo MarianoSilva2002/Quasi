@@ -23,8 +23,9 @@ public class CursoController {
 	
 	@Autowired
 	private ICursoService dService;
-	
-	
+
+	public static Curso CursoCActiva;
+
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
 		return "bienvenido"; //"bienvenido" es una pagina del frontend
@@ -37,23 +38,27 @@ public class CursoController {
 	}
 	@RequestMapping("/irRegistrar")
 	public String irPaginaRegistrar(Model model) {
-		model.addAttribute("Curso", new Curso());
-		return "curso"; //"anotacion" es una pagina del frontend para insertar y/o modificar
+		model.addAttribute("curso", new Curso());
+		return "crearcursodocente"; //"anotacion" es una pagina del frontend para insertar y/o modificar
 	}
 	
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Curso objAnotacion, BindingResult binRes, Model model) throws java.text.ParseException{
+		objAnotacion.setIddocente(DocenteController.DocenteCActiva);
 		if(binRes.hasErrors())
 		{
-			return "curso";
+			model.addAttribute("Docente", DocenteController.DocenteCActiva);
+			return "crearcursodocente";
 		}
 		else {
 			boolean flag = dService.grabar(objAnotacion);
-			if(flag)
-				return "redirect:/curso/listar";
+			if(flag){
+				CursoCActiva = objAnotacion;
+				return "redirect:/seccion/crear";
+			}
 			else {
 				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
-				return "redirect:/curso/irRegistrar";
+				return "redirect:/curso/crear";
 			}
 		}
 	}
@@ -99,6 +104,13 @@ public class CursoController {
 	{
 		dService.listarId(curso.getIdCurso());
 		return "listCurso";
+	}
+
+	@RequestMapping("/crear")
+	public String irPaginaCrearCurso(Model model) {
+		model.addAttribute("Docente", DocenteController.DocenteCActiva);
+		model.addAttribute("Curso", new Curso());
+		return "crearcursodocente"; //"anotacion" es una pagina del frontend para insertar y/o modificar
 	}
 }
 

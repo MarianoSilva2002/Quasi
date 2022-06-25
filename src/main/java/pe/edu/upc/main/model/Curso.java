@@ -2,15 +2,7 @@ package pe.edu.upc.main.model;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -25,18 +17,17 @@ public class Curso implements Serializable{
 	
 	@NotEmpty(message="Ingresar el nombre del curso")
 	@Column(name="Ncurso", nullable = false, length = 60)
-	private String Ncurso;
+	private String nCurso;
 	
 	@NotEmpty(message="La descripcion del curso es necesaria")
 	@Column(name="Descripcion", nullable = false, length = 500)
-	private String Descripcion;
-	
-	@NotEmpty(message="Ingresar la cantidad de evaluaciones")
-	@Column(name="NroEvaluaciones", nullable= false)
-	private int NroEvaluaciones;
+	private String descripcion;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="iddocente")
+	@Column(name="NroEvaluaciones", nullable= false)
+	private int nroEvaluaciones;
+
+	@ManyToOne
+	@JoinColumn(name="iddocente",nullable = false)
 	private Docente iddocente; 
 	
 	public Curso() {
@@ -46,12 +37,12 @@ public class Curso implements Serializable{
 
 	public Curso(int idCurso, @NotEmpty(message = "Ingresar el nombre del curso") String ncurso,
 			@NotEmpty(message = "La descripcion del curso es necesaria") String descripcion,
-			@NotEmpty(message = "Ingresar la cantidad de evaluaciones") int nroEvaluaciones, Docente iddocente) {
+			int nroEvaluaciones, Docente iddocente) {
 		super();
 		this.idCurso = idCurso;
-		Ncurso = ncurso;
-		Descripcion = descripcion;
-		NroEvaluaciones = nroEvaluaciones;
+		nCurso = ncurso;
+		this.descripcion = descripcion;
+		this.nroEvaluaciones = nroEvaluaciones;
 		this.iddocente = iddocente;
 	}
 
@@ -63,28 +54,28 @@ public class Curso implements Serializable{
 		this.idCurso = idCurso;
 	}
 
-	public String getNcurso() {
-		return Ncurso;
+	public String getnCurso() {
+		return nCurso;
 	}
 
-	public void setNcurso(String ncurso) {
-		Ncurso = ncurso;
+	public void setnCurso(String nCurso) {
+		this.nCurso = nCurso;
 	}
 
 	public String getDescripcion() {
-		return Descripcion;
+		return descripcion;
 	}
 
 	public void setDescripcion(String descripcion) {
-		Descripcion = descripcion;
+		this.descripcion = descripcion;
 	}
 
 	public int getNroEvaluaciones() {
-		return NroEvaluaciones;
+		return nroEvaluaciones;
 	}
 
 	public void setNroEvaluaciones(int nroEvaluaciones) {
-		NroEvaluaciones = nroEvaluaciones;
+		this.nroEvaluaciones = nroEvaluaciones;
 	}
 
 	public Docente getIddocente() {

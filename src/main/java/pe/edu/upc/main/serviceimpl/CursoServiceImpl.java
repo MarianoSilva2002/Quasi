@@ -45,5 +45,10 @@ public class CursoServiceImpl implements ICursoService{
 	public List<Curso> listar() {
 		return dCurso.findAll();
 	}
-	
+
+	@Override
+	public List<Curso> cursosporDocente(int docente) {
+		return dCurso.cursosporDocente(docente);
+	}
+
 }

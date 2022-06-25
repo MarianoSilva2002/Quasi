@@ -136,65 +136,31 @@
 </head>
 
 <body>
-<div th:replace="fragments/header2 :: header"></div>
+    <div th:replace="fragments/header2 :: header"></div>
 
-<div class="row py-3">
+    <div class="row py-3">
         <div class="col"></div>
         <div class="col dflexcentro">
             <img class="img-fluid align-middle" th:src="@{/img/Quasi.png}" alt="Logo de Quasi">
         </div>
         <div class="col"></div>
     </div>
+
     <br>
     <br>
-    <form th:action="@{/docente/registrar}" th:object="${docente}" class="justify-content-center border-0 shadow-none">
+    <form th:action="@{/alumno/cambiocontrasena2}" th:object="${alumno}" class=" justify-content-center border-0 shadow-none">
         <div class="row">
             <div class="col-3"></div>
             <div class="col-md-2 color-celeste pt-3 rounded">
 
                 <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
-                    <p class="pb-3">Nombre de usuario</p>
+                    <p class="pb-3">Correo</p>
                 </div>
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-3 color-celeste pt-3 rounded">
-                <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
-                    <input th:field="*{nombre}" type="text" placeholder="Nombre de Usuario..." class="form-control" th:errorclass="'form-control alert-danger'">
-                    <small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-md-2 color-celeste pt-3 rounded">
-
-                <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
-                    <p class="pb-3">Apellido Paterno</p>
-                </div>
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-3 color-celeste pt-3 rounded">
-                <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
-                    <input th:field="*{aPaterno}" type="text" placeholder="Apellido Paterno..." class="form-control" th:errorclass="'form-control alert-danger'">
-                    <small class="form-text text-danger" th:if="${#fields.hasErrors('aPaterno')}" th:errors="*{aPaterno}"></small>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-md-2 color-celeste pt-3 rounded">
-
-                <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
-                    <p class="pb-3">Apellido Materno</p>
-                </div>
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-3 color-celeste pt-3 rounded">
-                <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
-                    <input th:field="*{aMaterno}" type="text" placeholder="Apellido Materno..." class="form-control" th:errorclass="'form-control alert-danger'">
-                    <small class="form-text text-danger" th:if="${#fields.hasErrors('aMaterno')}" th:errors="*{aMaterno}"></small>
+                <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
+                    <input th:field="*{correo}" type="text" placeholder="Correo..." class="form-control" name="uname" required>
                 </div>
             </div>
         </div>
@@ -209,9 +175,8 @@
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-3 color-celeste pt-3 rounded">
-                <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
-                    <input th:field="*{contrasena}" type="text" placeholder="Contraseña..." class="form-control" th:errorclass="'form-control alert-danger'">
-                    <small class="form-text text-danger" th:if="${#fields.hasErrors('contrasena')}" th:errors="*{contrasena}"></small>
+                <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
+                    <input th:field="*{contrasena}" type="text" placeholder="Contraseña..." class="form-control" name="uname" required>
                 </div>
             </div>
         </div>
@@ -221,13 +186,13 @@
             <div class="col-md-2 color-celeste pt-3 rounded">
 
                 <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
-                    <p class="pb-3">Confirmar Contraseña</p>
+                    <p class="pb-3">Nueva contraseña</p>
                 </div>
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-3 color-celeste pt-3 rounded">
-                <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
-                    <input type="text" placeholder="Confirmar Contraseña..." class="form-control">
+                <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
+                    <input type="text" placeholder="Nueva contraseña..." class="form-control" name="uname" required>
                 </div>
             </div>
         </div>
@@ -237,104 +202,89 @@
             <div class="col-md-2 color-celeste pt-3 rounded">
 
                 <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
-                    <p class="pb-3">Correo Electronico</p>
+                    <p class="pb-3">Confirmar nueva contraseña</p>
                 </div>
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-3 color-celeste pt-3 rounded">
-                <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
-                    <input th:field="*{correo}" type="email" placeholder="Correo Electronico..." class="form-control" th:errorclass="'form-control alert-danger'">
-                    <small class="form-text text-danger" th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"></small>
+                <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
+                    <input type="text" id="confirm_password" placeholder="Confirmar Contraseña..." class="form-control" required>
                 </div>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-3"></div>
-            <div class="col-md-2 color-celeste pt-3 rounded">
-
-                <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
-                    <p class="pb-3">Género</p>
-                </div>
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-3 color-celeste pt-3 rounded">
-                <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
-                    <input th:field="*{genero}" type="text" placeholder="Género..." class="form-control" th:errorclass="'form-control alert-danger'">
-                    <small class="form-text text-danger" th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></small>
+            <div class="col-9">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox" name="remember" required> Desvincular cuenta de otros dispositivos
+                      <div class="valid-feedback">Válido.</div>
+                    </label>
                 </div>
             </div>
         </div>
-        <br>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-md-2 color-celeste pt-3 rounded">
 
-                <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
-                    <p class="pb-3">Especialización</p>
-                </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-3 p-4 dflexcentro">
+                <button type="submit" class="btn btn-block color-azul-oscuro text-white rounded">Cambiar
+                    </button>
             </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-3 color-celeste pt-3 rounded">
-                <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
-                    <input th:field="*{especialidad}" type="text" placeholder="Especialización..." class="form-control" th:errorclass="'form-control alert-danger'">
-                    <small class="form-text text-danger" th:if="${#fields.hasErrors('especialidad')}" th:errors="*{especialidad}"></small>
-                </div>
-            </div>
+            <div class="col"></div>
         </div>
-        <br>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-md-2 color-celeste pt-3 rounded">
 
-                <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
-                    <p class="pb-3">Pregunta de seguridad</p>
+        <div class="row invisible">
+            <div class="col-1 color-celeste pt-3 rounded">
+                <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
+                    <input th:field="*{idAlumno}" type="text" placeholder="Contraseña..." class="form-control" th:errorclass="'form-control alert-danger'">
                 </div>
             </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-3 color-celeste pt-3 rounded">
+            <div class="col-1 color-celeste pt-3 rounded">
                 <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
-                    <select class="form-control" th:field="*{pregunta.idPreguntas_Seguridad}">
+                    <input th:field="*{nombre}" type="text" placeholder="Contraseña..." class="form-control" th:errorclass="'form-control alert-danger'">
+                </div>
+            </div>
+            <div class="col-1 color-celeste pt-3 rounded">
+                <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
+                    <input th:field="*{aPaterno}" type="text" placeholder="Contraseña..." class="form-control" th:errorclass="'form-control alert-danger'">
+                </div>
+            </div>
+            <div class="col-1 color-celeste pt-3 rounded">
+                <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
+                    <input th:field="*{aMaterno}" type="text" placeholder="Contraseña..." class="form-control" th:errorclass="'form-control alert-danger'">
+                </div>
+            </div>
+            <div class="col-1 color-celeste pt-3 rounded">
+                <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
+                    <input th:field="*{genero}" type="text" placeholder="Contraseña..." class="form-control" th:errorclass="'form-control alert-danger'">
+                </div>
+            </div>
+            <div class="col-1 color-celeste pt-3 rounded">
+                <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
+                    <input th:field="*{carrera}" type="text" placeholder="Contraseña..." class="form-control" th:errorclass="'form-control alert-danger'">
+                </div>
+            </div>
+            <div class="col-1 color-celeste pt-3 rounded">
+                <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
+                    <select class="form-control" th:field="*{idPregunta.idPreguntas_Seguridad}">
                         <option th:each="p: ${listaPreguntas}"
                                 th:value="${p.idPreguntas_Seguridad}"
                                 th:text="${p.pregunta}"
-                                th:selected="(${p.idPreguntas_Seguridad}==*{pregunta.idPreguntas_Seguridad})">
+                                th:selected="(${p.idPreguntas_Seguridad}==*{idPregunta.idPreguntas_Seguridad})">
                         </option>
-                    </select>
-                </div>
+                    </select>                </div>
             </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-md-2 color-celeste pt-3 rounded">
-
-                <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
-                    <p class="pb-3">Respuesta</p>
-                </div>
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-3 color-celeste pt-3 rounded">
+            <div class="col-1 color-celeste pt-3 rounded">
                 <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
-                    <input th:field="*{respuestaseguridad}" type="text" placeholder="Respuesta..." class="form-control" th:errorclass="'form-control alert-danger'">
-                    <small class="form-text text-danger" th:if="${#fields.hasErrors('respuestaseguridad')}" th:errors="*{respuestaseguridad}"></small>
+                    <input th:field="*{respuestaSeguridad}" type="text" placeholder="Contraseña..." class="form-control" th:errorclass="'form-control alert-danger'">
                 </div>
             </div>
-        </div>
-        <br>
-
-
-        <div class="col-md-12 p-4">
-            <div class="row justify-content-center">
-                <button type="submit" class="btn color-azul-oscuro text-white col-md-2 font-weight-bold rounded">Registrarse</button>
-
-            </div>
-
         </div>
     </form>
-    <br>
-    <br>
 
+    <br>
+    <br>
     <div th:replace="fragments/footer :: footer"></div>
 </body>
 

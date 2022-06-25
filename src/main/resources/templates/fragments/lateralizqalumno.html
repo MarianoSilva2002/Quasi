@@ -36,31 +36,16 @@
 <!-- Sintaxis th:fragment="Nombre del fragment" -->
 <div th:fragment="header">
     <!-- this is header -->
-    <nav class="navbar navbar-expand-sm color-azul-oscuro navbar-dark fixed-top">
-        <a class="navbar-brand" href="#">QUASI</a>
-        <!-- Toggler/collapsibe Button -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Navbar links -->
-        <div class="collapse navbar-collapse justify-content-end text-white font-weight-bold" id="collapsibleNavbar">
-            <ul class="navbar-nav ">
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/alumno/editarperfil}">Configuración</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/alumno/}">Cursos</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/alumno/}">Calificaciones</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/login/}">Cerrar Sesion</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <ul class="list-group listasinseparador ml-4 font-weight-bold" style="font-size: 1.6rem;">
+        <li class="listahorizontal">Fundamentos de TI (Sección: GV2035)</li>
+        <li class="listahorizontal"><a>Informacion General</a> </li>
+        <li class="listahorizontal"><a>Anuncios</a></li>
+        <li class="listahorizontal"><a>Calificaciones</a></li>
+        <li class="listahorizontal"><a>Consultas</a></li>
+        <li class="listahorizontal"><a>Anotaciones</a></li>
+        <li class="listahorizontal"><a>UNIDAD 1</a></li>
+        <li class="listahorizontal"><a>Semana 1-5</a></li>
+    </ul>
 </div>
 
 </body>
