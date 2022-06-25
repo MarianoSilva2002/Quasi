@@ -1,5 +1,6 @@
 package pe.edu.upc.main.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -16,11 +17,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
-import pe.edu.upc.main.model.Docente;
-import pe.edu.upc.main.model.Preguntas_Seguridad;
-import pe.edu.upc.main.service.IAlumnoService;
-import pe.edu.upc.main.model.Alumno;
-import pe.edu.upc.main.service.IPreguntas_SeguridadService;
+import pe.edu.upc.main.model.*;
+import pe.edu.upc.main.repository.IAlumno_cursosRepository;
+import pe.edu.upc.main.service.*;
 //import pe.edu.upc.spring.service.IAlumno_cursosService;
 import pe.edu.upc.main.service.IPreguntas_SeguridadService;
 
@@ -32,6 +31,15 @@ public class AlumnoController {
 	private IPreguntas_SeguridadService psService;
 	@Autowired
 	private IAlumnoService dService;
+
+	@Autowired
+	private IAlumno_cursosService acService;
+
+	@Autowired
+	private ISeccionService sService;
+
+	@Autowired
+	private ICursoService cService;
 
 	public static Alumno AlumnoCActiva;
 	//@Autowired
@@ -235,4 +243,51 @@ public class AlumnoController {
 		}
 	}
 
+	@RequestMapping("/cursos")
+	public String irCursosAlumno(Model model) {
+		List<Alumno_cursos> listaAlumnoCursos = acService.cursosporAlumno(AlumnoCActiva.getIdAlumno());
+		List<Curso> listaCursos = new ArrayList<Curso>();
+		List<Seccion> listaSecciones = new ArrayList<Seccion>();
+		for (Alumno_cursos ac:
+				listaAlumnoCursos) {
+			Optional<Curso> cursos =cService.listarId(ac.getCurso().getIdCurso());
+			if (cursos != null)
+				listaCursos.add(cursos.get());
+		}
+		for (Curso c:
+				listaCursos) {
+			List<Seccion> secciones =sService.seccionporCurso(c.getIdCurso());
+			for (Seccion s:
+					secciones) {
+				listaSecciones.add(s);
+			}
+		}
+		model.addAttribute("listaCursos", listaCursos);
+		model.addAttribute("listaSecciones", listaSecciones);
+		return "seccionesdocente";
+	}
+
+	@RequestMapping("/nuevoscursos")
+	public String irNuevosCursosAlumno(Model model) {
+		List<Alumno_cursos> listaAlumnoCursos = acService.cursosporAlumno(AlumnoCActiva.getIdAlumno());
+		List<Curso> listaCursos = cService.listar();
+		for (Alumno_cursos ac:
+				listaAlumnoCursos) {
+			Optional<Curso> cursos =cService.listarId(ac.getCurso().getIdCurso());
+			if (cursos != null)
+				listaCursos.remove(cursos.get());
+		}
+		List<Seccion> listaSecciones = new ArrayList<Seccion>();
+		for (Curso c:
+				listaCursos) {
+			List<Seccion> secciones =sService.seccionporCurso(c.getIdCurso());
+			for (Seccion s:
+					secciones) {
+				listaSecciones.add(s);
+			}
+		}
+		model.addAttribute("listaCursos", listaCursos);
+		model.addAttribute("listaSecciones", listaSecciones);
+		return "nuevoscursosalumno";
+	}
 }

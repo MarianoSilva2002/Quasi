@@ -148,30 +148,32 @@
     </div>
     <br>
     <br>
-    <div class="row dflexcentro mb-5">
-        <div class="col-1"></div>
-        <div class="col-3">
-            <a href="">
+    <div class="row dflexcentro mb-5" th:each="s: ${listaSecciones}">
+        <div class="col"></div>
+        <div class="col-4">
+            <div th:if="${s.idSeccion % 2 == 0} ">
+            <a th:href="@{'/seccion/entrar/'} + ${s.idSeccion}">
                 <img th:src="@{/img/Curso1.png}" class="curso">
                 <div class="color-amarillo text-dark">
-                    <p>Fundamentos de TI</p>
-                    <p>Sección: GV2035</p>
-                    <p>Horario: Lunes 11:00-13:00</p>
+                    <p th:text="${s.idcurso.nCurso}"></p>
+                    <p>Sección: <span th:text="${s.Nombre}"></span></p>
+                    <p>Horario: <span th:text="${s.horaInicio}"></span> - <span th:text="${s.horaFin}"></span></p>
                 </div>
             </a>
-        </div>
-        <div class="col-2"></div>
-        <div class="col-3">
-            <a href="">
+            </div>
+            <div th:unless="${s.idSeccion % 2 == 0}">
+            <a th:href="@{'/seccion/entrar/'} + ${s.idSeccion}">
                 <img th:src="@{/img/Curso2.png}" class="curso">
                 <div class="color-naranja text-dark">
-                    <p>Cálculo I</p>
-                    <p>Sección: CA1420</p>
-                    <p>Horario: Martes 15:00-17:00</p>
+                    <p th:text="${s.idcurso.nCurso}"></p>
+                    <p>Sección: <span th:text="${s.Nombre}"></span></p>
+                    <p>Horario: <span th:text="${s.horaInicio}"></span> - <span th:text="${s.horaFin}"></span></p>
                 </div>
             </a>
+            </div>
         </div>
-        <div class="col-1"></div>
+
+        <div class="col"></div>
     </div>
 
     <div th:replace="fragments/footer :: footer"></div>

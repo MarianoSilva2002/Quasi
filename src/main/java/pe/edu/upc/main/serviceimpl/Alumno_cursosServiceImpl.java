@@ -45,5 +45,10 @@ public class Alumno_cursosServiceImpl implements IAlumno_cursosService {
 	public List<Alumno_cursos> listar() {
 		return dAlumno_cursos.findAll();
 	}
-	
+
+	@Override
+	public List<Alumno_cursos> cursosporAlumno(int alumno) {
+		return dAlumno_cursos.cursosporAlumno(alumno);
+	}
+
 }
