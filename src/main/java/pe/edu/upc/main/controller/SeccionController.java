@@ -107,4 +107,35 @@ public class SeccionController {
 		dService.listarId(seccion.getIdSeccion());
 		return "listSeccion";
 	}
+
+	@RequestMapping("/entrar/{id}")
+	public String entrardocente(@PathVariable int id, Model model, RedirectAttributes objRedir) throws ParseException{
+		Optional<Seccion> objSeccion = dService.listarId(id);
+		if(objSeccion == null) {
+			objRedir.addFlashAttribute("mensaje","Ocurrio un roche, LUZ ROJA");
+			return "redirect:/docente/cursos";
+		}
+		else {
+			if(objSeccion.isPresent())
+				objSeccion.ifPresent(o -> model.addAttribute("seccion",o));
+
+			return "infogeneralcursodocente";
+		}
+	}
+
+	@RequestMapping("/entrar2/{id}")
+	public String entraralumno(@PathVariable int id, Model model, RedirectAttributes objRedir) throws ParseException{
+		Optional<Seccion> objSeccion = dService.listarId(id);
+		if(objSeccion == null) {
+			objRedir.addFlashAttribute("mensaje","Ocurrio un roche, LUZ ROJA");
+			return "redirect:/alumno/cursos";
+		}
+		else {
+			if(objSeccion.isPresent())
+				objSeccion.ifPresent(o -> model.addAttribute("seccion",o));
+
+			return "infogeneralcursoalumno";
+		}
+	}
+
 }
