@@ -200,7 +200,7 @@ public class AlumnoController {
 				return "recuperarContrasenap2a";
 			}else {
 				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
-				return "redirect:/alumno/irRegistrar";
+				return "redirect:/alumno/recuperarcontrasena";
 			}
 		}
 	}
