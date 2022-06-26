@@ -183,7 +183,7 @@ public class DocenteController {
 		if(binRes.hasErrors())
 		{
 			model.addAttribute("listaPreguntas", psService.listar());
-			return "alumno";
+			return "docente";
 		}
 		else {
 			Docente docente = dService.buscarDocenteporCorreo(objDocente.getCorreo()).get(0);
@@ -194,7 +194,7 @@ public class DocenteController {
 				return "recuperarContrasenap2d";
 			}else {
 				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
-				return "redirect:/alumno/irRegistrar";
+				return "redirect:/docente/recuperarcontrasena";
 			}
 		}
 	}
