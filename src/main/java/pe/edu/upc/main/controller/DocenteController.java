@@ -87,7 +87,7 @@ public class DocenteController {
 		else {
 			boolean flag = dService.grabar(objDocente);
 			if(flag)
-				return "redirect:/docente/listar";
+				return "redirect:/login/";
 			else {
 				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
 				return "redirect:/docente/irRegistrar";

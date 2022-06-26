@@ -37,14 +37,14 @@
 <div th:fragment="header">
     <!-- this is header -->
     <ul class="list-group listasinseparador ml-4 font-weight-bold" style="font-size: 1.6rem;">
-        <li class="listahorizontal">Fundamentos de TI (Sección: GV2035)</li>
-        <li class="listahorizontal"><a>Informacion General</a> </li>
-        <li class="listahorizontal"><a>Anuncios</a></li>
-        <li class="listahorizontal"><a>Calificaciones</a></li>
-        <li class="listahorizontal"><a>Consultas</a></li>
-        <li class="listahorizontal"><a>Anotaciones</a></li>
-        <li class="listahorizontal"><a>UNIDAD 1</a></li>
-        <li class="listahorizontal"><a>Semana 1-5</a></li>
+        <li class="listahorizontal"><span th:text="${curso.nCurso}"></span> (Sección: <span th:text="${seccion.Nombre}"></span>)</li>
+        <li class="listahorizontal"><a th:href="@{/seccion/infogeneral1}">Informacion General</a> </li>
+        <li class="listahorizontal"><a th:href="@{/seccion/anuncios1}">Anuncios</a></li>
+        <li class="listahorizontal"><a th:href="@{/seccion/calificaciones1}">Calificaciones</a></li>
+        <li class="listahorizontal"><a th:href="@{/seccion/consultas1}">Consultas</a></li>
+        <li class="listahorizontal"><a th:href="@{/seccion/anotaciones}">Anotaciones</a></li>
+        <li class="listahorizontal"><a th:href="@{/seccion/unidad2}">UNIDAD 1</a></li>
+        <li class="listahorizontal"><a th:href="@{/seccion/unidad2}">Semana 1-5</a></li>
     </ul>
 </div>
 

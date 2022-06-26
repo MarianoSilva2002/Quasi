@@ -98,7 +98,7 @@ public class AlumnoController {
 		else {
 			boolean flag = dService.grabar(objAlumno);
 			if(flag)
-				return "redirect:/alumno/listar";
+				return "redirect:/login/";
 			else {
 				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
 				return "redirect:/alumno/irRegistrar";
@@ -245,37 +245,21 @@ public class AlumnoController {
 
 	@RequestMapping("/cursos")
 	public String irCursosAlumno(Model model) {
-		List<Alumno_cursos> listaAlumnoCursos = acService.cursosporAlumno(AlumnoCActiva.getIdAlumno());
-		List<Curso> listaCursos = new ArrayList<Curso>();
+		List<Alumno_cursos> listaAlumnoCursos = acService.seccionesporAlumno(AlumnoCActiva.getIdAlumno());
 		List<Seccion> listaSecciones = new ArrayList<Seccion>();
-		for (Alumno_cursos ac:
-				listaAlumnoCursos) {
-			Optional<Curso> cursos =cService.listarId(ac.getCurso().getIdCurso());
-			if (cursos != null)
-				listaCursos.add(cursos.get());
+		for (Alumno_cursos ac: listaAlumnoCursos) {
+			listaSecciones.add(ac.getSeccion());
 		}
-		for (Curso c:
-				listaCursos) {
-			List<Seccion> secciones =sService.seccionporCurso(c.getIdCurso());
-			for (Seccion s:
-					secciones) {
-				listaSecciones.add(s);
-			}
-		}
-		model.addAttribute("listaCursos", listaCursos);
 		model.addAttribute("listaSecciones", listaSecciones);
-		return "seccionesdocente";
+		return "cursosalumno";
 	}
 
 	@RequestMapping("/nuevoscursos")
 	public String irNuevosCursosAlumno(Model model) {
-		List<Alumno_cursos> listaAlumnoCursos = acService.cursosporAlumno(AlumnoCActiva.getIdAlumno());
+		List<Alumno_cursos> listaAlumnoCursos = acService.seccionesporAlumno(AlumnoCActiva.getIdAlumno());
 		List<Curso> listaCursos = cService.listar();
-		for (Alumno_cursos ac:
-				listaAlumnoCursos) {
-			Optional<Curso> cursos =cService.listarId(ac.getCurso().getIdCurso());
-			if (cursos != null)
-				listaCursos.remove(cursos.get());
+		for(Alumno_cursos ac: listaAlumnoCursos){
+			listaCursos.remove(ac.getSeccion().getIdcurso());
 		}
 		List<Seccion> listaSecciones = new ArrayList<Seccion>();
 		for (Curso c:
@@ -286,7 +270,6 @@ public class AlumnoController {
 				listaSecciones.add(s);
 			}
 		}
-		model.addAttribute("listaCursos", listaCursos);
 		model.addAttribute("listaSecciones", listaSecciones);
 		return "nuevoscursosalumno";
 	}

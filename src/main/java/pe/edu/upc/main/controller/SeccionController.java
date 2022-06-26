@@ -17,7 +17,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
+import pe.edu.upc.main.model.Alumno_cursos;
 import pe.edu.upc.main.model.Seccion;
+import pe.edu.upc.main.service.IAlumno_cursosService;
 import pe.edu.upc.main.service.ISeccionService;
 
 @Controller
@@ -27,7 +29,9 @@ public class SeccionController {
 	
 	@Autowired
 	private ISeccionService dService;
-	
+
+	@Autowired
+	private IAlumno_cursosService acService;
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
@@ -118,7 +122,8 @@ public class SeccionController {
 		else {
 			if(objSeccion.isPresent())
 				objSeccion.ifPresent(o -> model.addAttribute("seccion",o));
-
+			model.addAttribute("seccion",objSeccion.get());
+			model.addAttribute("curso",objSeccion.get().getIdcurso());
 			return "infogeneralcursodocente";
 		}
 	}
@@ -133,9 +138,30 @@ public class SeccionController {
 		else {
 			if(objSeccion.isPresent())
 				objSeccion.ifPresent(o -> model.addAttribute("seccion",o));
-
+			model.addAttribute("seccion",objSeccion.get());
+			model.addAttribute("curso",objSeccion.get().getIdcurso());
 			return "infogeneralcursoalumno";
 		}
 	}
 
+	@RequestMapping("/registraralumno/{id}")
+	public String registroalumnocurso(@PathVariable int id, Model model, RedirectAttributes objRedir) throws ParseException{
+		Optional<Seccion> objSeccion = dService.listarId(id);
+		if(objSeccion == null) {
+			objRedir.addFlashAttribute("mensaje","Ocurrio un roche, LUZ ROJA");
+			return "redirect:/alumno/cursos";
+		}
+		else {
+			Alumno_cursos ac = new Alumno_cursos();
+			ac.setSeccion(objSeccion.get());
+			ac.setAlumno(AlumnoController.AlumnoCActiva);
+			boolean flag = acService.grabar(ac);
+			if(flag)
+				return "redirect:/alumno/nuevoscursos";
+			else{
+				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
+				return "redirect:/alumno/nuevoscursos";
+			}
+		}
+	}
 }
