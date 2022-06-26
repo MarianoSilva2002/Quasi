@@ -38,6 +38,8 @@ public class SeccionController {
 	@Autowired
 	private IConsultaService coService;
 
+	@Autowired
+	private IRespuestaConsultasService rcService;
 	public static Seccion CActivaSeccion;
 	
 	@RequestMapping("/bienvenido")
@@ -250,6 +252,7 @@ public class SeccionController {
 
 			model.addAttribute("seccion",objSeccion.get());
 			model.addAttribute("curso",objSeccion.get().getIdcurso());
+			model.addAttribute("listarespuesta",rcService.listar());
 			if(listaConsultas.isEmpty())
 				return "consultasalumno2";
 			else
@@ -434,11 +437,12 @@ public class SeccionController {
 			if(objSeccion.isPresent())
 				objSeccion.ifPresent(o -> model.addAttribute("seccion",o));
 
-			List<Consulta> listaConsultas = coService.consultaporAlumno(AlumnoController.AlumnoCActiva.getIdAlumno());
+			List<Consulta> listaConsultas = coService.consultaporSeccion(CActivaSeccion.getIdSeccion());
 
 			model.addAttribute("seccion",objSeccion.get());
 			model.addAttribute("curso",objSeccion.get().getIdcurso());
 			model.addAttribute("listaConsultas",listaConsultas);
+			model.addAttribute("respuestaConsulta",new RespuestaConsultas());
 			return "consultasdocente";
 		}
 	}

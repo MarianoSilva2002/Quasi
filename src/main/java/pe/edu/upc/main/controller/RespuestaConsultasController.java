@@ -1,5 +1,6 @@
 package pe.edu.upc.main.controller;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
@@ -15,7 +16,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.el.parser.ParseException;
 
+import pe.edu.upc.main.model.Consulta;
 import pe.edu.upc.main.model.RespuestaConsultas;
+import pe.edu.upc.main.service.IConsultaService;
 import pe.edu.upc.main.service.IRespuestaConsultasService;
 
 @Controller
@@ -25,7 +28,9 @@ public class RespuestaConsultasController {
 	
 	@Autowired
 	private IRespuestaConsultasService dService;
-	
+
+	@Autowired
+	private IConsultaService cService;
 	
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
@@ -44,21 +49,33 @@ public class RespuestaConsultasController {
 		return "respuestaconsultas"; //"RespuestaConsultas" es una pagina del frontend para insertar y/o modificar
 	}
 	
-	@RequestMapping("/registrar")
-	public String registrar(@ModelAttribute RespuestaConsultas objRespuestaConsultas, BindingResult binRes, Model model) throws ParseException{
-		if(binRes.hasErrors())
-		{
-			return "respuestaconsultas";
+	@RequestMapping("/registrar/{id}")
+	public String registrar(@ModelAttribute RespuestaConsultas objRespuestaConsultas, @PathVariable int id, BindingResult binRes, Model model, RedirectAttributes objRedir) throws ParseException{
+		Optional<Consulta> objConsulta = cService.listarId(id);
+		if(objRespuestaConsultas == null) {
+			objRedir.addFlashAttribute("mensaje","Ocurrio un roche, LUZ ROJA");
+			return "redirect:/seccion/consultas2/" + SeccionController.CActivaSeccion.getIdSeccion();
 		}
 		else {
-			boolean flag = dService.grabar(objRespuestaConsultas);
-			if(flag)
-				return "redirect:/respuestaconsultas/listar";
+			Date fechaactual = new Date();
+			objRespuestaConsultas.setFechaRespuesta(fechaactual);
+			objRespuestaConsultas.setHoraRespuesta(fechaactual);
+			objRespuestaConsultas.setConsulta(objConsulta.get());
+			if(binRes.hasErrors())
+			{
+				return "redirect:/seccion/consultas2/" + SeccionController.CActivaSeccion.getIdSeccion();
+			}
 			else {
-				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
-				return "redirect:/respuestaconsultas/irRegistrar";
+				boolean flag = dService.grabar(objRespuestaConsultas);
+				if(flag)
+					return "redirect:/seccion/consultas2/" + SeccionController.CActivaSeccion.getIdSeccion();
+				else {
+					model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
+					return "redirect:/seccion/consultas2/" + SeccionController.CActivaSeccion.getIdSeccion();
+				}
 			}
 		}
+
 	}
 	
 	@RequestMapping("/modificar/{id}")
