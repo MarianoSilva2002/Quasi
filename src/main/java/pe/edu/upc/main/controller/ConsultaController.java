@@ -125,7 +125,7 @@ public class ConsultaController {
 				objSeccion.ifPresent(o -> model.addAttribute("seccion",o));
 
 
-			return "redirect:/seccion/anotaciones/" + objSeccion.get().getIdSeccion();
+			return "redirect:/seccion/consulta1/" + objSeccion.get().getIdSeccion();
 		}
 	}
 }
