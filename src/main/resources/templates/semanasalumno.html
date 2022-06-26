@@ -136,68 +136,63 @@
 </head>
 
 <body>
-<div th:replace="fragments/header2 :: header"></div>
+    <div th:replace="fragments/header3 :: header"></div>
+    <br>
+    <br>
 
-
-<div class="row py-3">
-        <div class="col"></div>
-        <div class="col dflexcentro">
-            <img class="img-fluid align-middle" th:src="@{/img/Quasi.png}" alt="Logo de Quasi">
+    <div class="row">
+        <div class="col-3 color-azul">
+            <div th:replace="fragments/lateralizqalumno :: header"></div>
         </div>
-        <div class="col"></div>
+        <div class="col-9 pt-5">
+            <div class="row">
+                <div class="centrar font-weight-bold">
+                    <h1>UNIDAD 1</h1>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-10 color-verde-claro">
+                    <h4 class="my-4 ml-3 font-weight-bold dflex" style="display: inline-block;"><a th:href="@{'/seccion/semana1/'}+${seccion.idSeccion}">SEMANA 1</a></h4>
+                </div>
+                <div class="col"></div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-10 color-verde-claro">
+                    <h4 class="my-4 ml-3 font-weight-bold dflex" style="display: inline-block;"><a th:href="@{'/seccion/semana1/'}+${seccion.idSeccion}">SEMANA 2</a></h4>
+                </div>
+                <div class="col"></div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-10 color-verde-claro">
+                    <h4 class="my-4 ml-3 font-weight-bold dflex" style="display: inline-block;"><a th:href="@{'/seccion/semana1/'}+${seccion.idSeccion}">SEMANA 3</a></h4>
+                </div>
+                <div class="col"></div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-10 color-verde-claro">
+                    <h4 class="my-4 ml-3 font-weight-bold dflex" style="display: inline-block;"><a th:href="@{'/seccion/semana1/'}+${seccion.idSeccion}">SEMANA 4</a></h4>
+                </div>
+                <div class="col"></div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-10 color-verde-claro">
+                    <h4 class="my-4 ml-3 font-weight-bold dflex" style="display: inline-block;"><a th:href="@{'/seccion/semana1/'}+${seccion.idSeccion}">SEMANA 5</a></h4>
+                </div>
+                <div class="col"></div>
+            </div>
+            <br>
+        </div>
     </div>
-
-    <br>
-    <br>
-    <form th:action="@{/alumno/iniciarSesion}" th:object="${alumno}" class=" justify-content-center border-0 shadow-none">
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-md-2 color-celeste pt-3 rounded">
-
-                <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
-                    <p class="pb-3">Correo del usuario</p>
-                </div>
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-3 color-celeste pt-3 rounded">
-                <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
-                    <input th:field="*{correo}" type="text" placeholder="Correo del usuario..." class="form-control" name="uname" required>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-md-2 color-celeste pt-3 rounded">
-
-                <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
-                    <p class="pb-3">Inserte Contraseña</p>
-                </div>
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-3 color-celeste pt-3 rounded">
-                <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
-                    <input th:field="*{contrasena}" type="password" id="confirm_password" placeholder="Inserte Contraseña..." class="form-control" required>
-                </div>
-            </div>
-        </div>
-        <br>
-
-        <div class="row">
-            <div class="col"></div>
-            <div class="col-6 p-4 dflexcentro">
-                <div class="">
-                    <button type="submit" class="btn btn-block color-azul-oscuro text-white rounded dblock centrar">Iniciar Sesión
-                    </button>
-                    <a class="font-weight-bold dblock text-center textopequeno" style="color: rgb(196, 196, 196)" th:href="@{/alumno/recuperarcontrasena}">Recuperar contrseña</a>
-                </div>
-            </div>
-            <div class="col"></div>
-        </div>
-    </form>
-
-    <br>
-    <br>
     <div th:replace="fragments/footer :: footer"></div>
 </body>
 

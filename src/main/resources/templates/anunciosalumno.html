@@ -151,28 +151,18 @@
                 </div>
             </div>
             <br>
-            <div class="row">
-                <div class="col"></div>
-                <div class="col-10 color-verde-claro">
-                    <h1 class="font-weight-bold">Profesor:</h1>
-                    <p class="justify-content-end dflex">02/04/2022</p>
-                    <p class="px-4 pb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sem eros, porta tempor vestibulum ut, aliquet ut sapien. Nam sed urna malesuada, consequat leo in, finibus risus. Suspendisse potenti. Maecenas tempus blandit est vel rutrum.
-                        Nulla mollis lacus diam. Sed molestie, arcu quis convallis viverra, leo quam molestie justo, vitae ullamcorper nibh libero nec metus.</p>
+            <div th:each="a: ${listaAnuncios}">
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col-10 color-verde-claro">
+                        <h1 class="font-weight-bold">Profesor: <span th:text="${a.idseccion.idcurso.iddocente.nombre}"></span></h1>
+                        <p class="justify-content-end dflex" th:text="${a.fechaanuncio}"> <span th:text="${a.horaanuncio}"></span></p>
+                        <p class="px-4 pb-5" th:text="${a.descripcion}"></p>
+                        </div>
+                    <div class="col"></div>
                 </div>
-                <div class="col"></div>
+                <br>
             </div>
-            <br>
-            <div class="row">
-                <div class="col"></div>
-                <div class="col-10 color-verde-claro">
-                    <h1 class="font-weight-bold">Profesor:</h1>
-                    <p class="justify-content-end dflex">02/04/2022</p>
-                    <p class="px-4 pb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sem eros, porta tempor vestibulum ut, aliquet ut sapien. Nam sed urna malesuada, consequat leo in, finibus risus. Suspendisse potenti. Maecenas tempus blandit est vel rutrum.
-                        Nulla mollis lacus diam. Sed molestie, arcu quis convallis viverra, leo quam molestie justo, vitae ullamcorper nibh libero nec metus.</p>
-                </div>
-                <div class="col"></div>
-            </div>
-            <br>
         </div>
     </div>
     <div th:replace="fragments/footer :: footer"></div>

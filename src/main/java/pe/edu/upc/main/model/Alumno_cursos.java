@@ -19,11 +19,11 @@ public class Alumno_cursos implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="Alumno", nullable = true)
-	private Alumno Alumno;
+	private Alumno alumno;
 
 	@ManyToOne
 	@JoinColumn(name="Seccion", nullable = true)
-	private Seccion Seccion;
+	private Seccion seccion;
 
 	public Alumno_cursos() {
 		super();
@@ -32,8 +32,8 @@ public class Alumno_cursos implements Serializable{
 
 	public Alumno_cursos(int idAlumno_curso, Alumno alumno, Seccion seccion) {
 		this.idAlumno_curso = idAlumno_curso;
-		Alumno = alumno;
-		Seccion = seccion;
+		this.alumno = alumno;
+		this.seccion = seccion;
 	}
 
 	public int getIdAlumno_curso() {
@@ -44,19 +44,19 @@ public class Alumno_cursos implements Serializable{
 		this.idAlumno_curso = idAlumno_curso;
 	}
 
-	public pe.edu.upc.main.model.Alumno getAlumno() {
-		return Alumno;
+	public Alumno getAlumno() {
+		return alumno;
 	}
 
-	public void setAlumno(pe.edu.upc.main.model.Alumno alumno) {
-		Alumno = alumno;
+	public void setAlumno(Alumno alumno) {
+		this.alumno = alumno;
 	}
 
-	public pe.edu.upc.main.model.Seccion getSeccion() {
-		return Seccion;
+	public Seccion getSeccion() {
+		return seccion;
 	}
 
-	public void setSeccion(pe.edu.upc.main.model.Seccion seccion) {
-		Seccion = seccion;
+	public void setSeccion(Seccion seccion) {
+		this.seccion = seccion;
 	}
 }

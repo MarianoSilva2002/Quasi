@@ -45,5 +45,15 @@ public class ConsultaServiceImpl implements IConsultaService{
 	public List<Consulta> listar() {
 		return dConsulta.findAll();
 	}
-	
+
+	@Override
+	public List<Consulta> consultaporAlumno(int idAlumno) {
+		return dConsulta.consultaporAlumno(idAlumno);
+	}
+
+	@Override
+	public List<Consulta> consultaporSeccion(int idSeccion) {
+		return dConsulta.consultaporSeccion(idSeccion);
+	}
+
 }

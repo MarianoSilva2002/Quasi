@@ -24,7 +24,7 @@ public class Alumno_CursosController {
 	@Autowired
 	private IAlumno_cursosService dService;
 	
-	
+	public static Alumno_cursos CActivaAlumnoCurso;
 	@RequestMapping("/bienvenido")
 	public String irPaginaBienvenida() {
 		return "bienvenido"; //"bienvenido" es una pagina del frontend

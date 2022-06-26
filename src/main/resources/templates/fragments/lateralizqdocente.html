@@ -38,12 +38,12 @@
     <!-- this is header -->
     <ul class="list-group listasinseparador ml-4 font-weight-bold" style="font-size: 1.6rem;">
         <li class="listahorizontal"><span th:text="${curso.nCurso}"></span> (Sección: <span th:text="${seccion.Nombre}">)</li>
-        <li class="listahorizontal"><a th:href="@{/seccion/infogeneral2}">Informacion General</a> </li>
-        <li class="listahorizontal"><a th:href="@{/seccion/anuncios2}">Anuncios</a></li>
-        <li class="listahorizontal"><a th:href="@{/seccion/calificaciones2}">Calificaciones</a></li>
-        <li class="listahorizontal"><a th:href="@{/seccion/consultas2}">Consultas</a></li>
-        <li class="listahorizontal"><a th:href="@{/seccion/unidad1}">UNIDAD 1</a></li>
-        <li class="listahorizontal"><a th:href="@{/seccion/unidad1}">Semana 1-5</a></li>
+        <li class="listahorizontal"><a th:href="@{'/seccion/infogeneral2/'} + ${seccion.idSeccion}">Informacion General</a> </li>
+        <li class="listahorizontal"><a th:href="@{'/seccion/anuncios2/'} + ${seccion.idSeccion}">Anuncios</a></li>
+        <li class="listahorizontal"><a th:href="@{'/seccion/calificaciones2/'} + ${seccion.idSeccion}">Calificaciones</a></li>
+        <li class="listahorizontal"><a th:href="@{'/seccion/consultas2/'}+ ${seccion.idSeccion}">Consultas</a></li>
+        <li class="listahorizontal"><a th:href="@{'/seccion/unidad2/'} + ${seccion.idSeccion}">UNIDAD 1</a></li>
+        <li class="listahorizontal"><a th:href="@{'/seccion/unidad2/'} + ${seccion.idSeccion}">Semana 1-5</a></li>
     </ul>
 </div>
 

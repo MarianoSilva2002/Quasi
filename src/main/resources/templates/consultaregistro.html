@@ -174,29 +174,33 @@
                 </div>
             </div>
 
-            <div class="row mb-5">
-                <div class="col"></div>
-                <div class="col-10 color-verde-claro centrarvh">
-                    <h4 class="mt-2">Nombre de consulta <span class="rojo">*</span></h4>
-                    <p class="mt-2 ml-2 color-blanco2 p-2">Nombre</p>
-                    <h4 class="mt-2">Descripción de consulta <span class="rojo">*</span></h4>
-                    <p class="mt-2 ml-2 color-blanco2 p-2">¿Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sem eros, porta tempor vestibulum ut, aliquet ut sapien. Nam sed urna malesuada, consequat leo in, finibus risus. Suspendisse potenti.?</p>
-                </div>
-                <div class="col"></div>
-            </div>
+            <form th:action="@{/consulta/registrar}" th:object="${consulta}">
+                <div class="row mb-5">
+                    <div class="col"></div>
+                    <div class="col-10 color-verde-claro centrarvh">
+                        <h4 class="mt-2">Nombre de consulta <span class="rojo">*</span></h4>
+                        <input type="text" name="message" th:field="*{nombreConsulta}" class="form-control mt-2 ml-2 color-blanco2 p-2" style="border: 0" placeholder="Nombre" th:errorclass="'form-control alert-danger'">
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('nombreConsulta')}" th:errors="*{nombreConsulta}"></small>
+                        <h4 class="mt-2">Descripción de consulta <span class="rojo">*</span></h4>
+                        <textarea name="message" rows="5" th:field="*{descripcion}" class="form-control mt-2 ml-2 color-blanco2 p-2" style="border: 0" placeholder="Escriba Consulta"></textarea>
 
-            <div class="row">
-                <div class="col-3 p-4">
-                    <button type="submit" class="btn btn-block bg-danger text-white rounded">Cancelar
-                    </button>
+                    </div>
+                    <div class="col"></div>
                 </div>
-                <div class="col"></div>
-                <div class="col-3 p-4 dflex align-content-end">
-                    <button type="submit" class="btn btn-block color-celeste text-white rounded">Agregar
+
+                <div class="row">
+                    <div class="col-3 p-4">
+                        <a th:href="@{'/consulta/regresar/'} + ${seccion.idSeccion}" class="btn btn-block bg-danger text-white rounded">Cancelar
+                        </a>
+                    </div>
+                    <div class="col"></div>
+                    <div class="col-3 p-4 dflex align-content-end">
+                        <button type="submit" class="btn btn-block color-celeste text-white rounded">Agregar
                         </button>
+                    </div>
+                    <div class="col-1"></div>
                 </div>
-                <div class="col-1"></div>
-            </div>
+            </form>
         </div>
     </div>
     <div th:replace="fragments/footer :: footer"></div>

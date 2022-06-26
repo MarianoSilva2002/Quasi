@@ -137,11 +137,12 @@
 
 <body>
     <div th:replace="fragments/header4 :: header"></div>
-
+    <br>
+    <br>
     <div class="row py-3">
         <div class="centrar">
             <h1 class="font-weight-bold">CREAR SECCIÓN</h1>
-            <p class="text-center">Secciones: 0</p>
+            <p class="text-center">Secciones: <span th:text="${cantsecciones}"></span></p>
         </div>
     </div>
 
@@ -231,22 +232,14 @@
         <div class="row">
             <div class="col"></div>
             <div class="col-3 p-4 dflexcentro">
-                <a class="btn btn-block color-celeste text-white rounded">Plan Calendario
-                    </a>
+                <button type="submit" class="btn btn-block color-celeste text-white rounded">Agregar seccion
+                </button>
             </div>
             <div class="col-3 p-4 dflexcentro">
-                <button type="submit" class="btn btn-block color-celeste text-white rounded">Agregar
-                    </button>
-            </div>
-            <div class="col"></div>
-        </div>
-        <div class="row">
-            <div class="col-4"></div>
-            <div class="col-4 p-4 dflexcentro">
-                <a th:href="@{/docente/bienvenido}" class="btn btn-block color-celeste text-white rounded">Crear
+                <a th:href="@{/docente/bienvenido}" class="btn btn-block color-celeste text-white rounded">Crear curso
                 </a>
             </div>
-            <div class="col-4"></div>
+            <div class="col"></div>
         </div>
     </form>
     <br>

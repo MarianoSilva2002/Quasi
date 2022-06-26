@@ -1,5 +1,6 @@
 package pe.edu.upc.main.controller;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.main.model.Anuncio;
+import pe.edu.upc.main.model.Seccion;
 import pe.edu.upc.main.service.IAnuncioService;
 
 @Controller
@@ -46,17 +48,21 @@ public class AnuncioController {
 	
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Anuncio objAnuncio, BindingResult binRes, Model model) throws ParseException{
+		Date fechaactual = new Date();
+		objAnuncio.setFechaanuncio(fechaactual);
+		objAnuncio.setHoraanuncio(fechaactual);
+		objAnuncio.setIdseccion(SeccionController.CActivaSeccion);
 		if(binRes.hasErrors())
 		{
-			return "anuncio";
+			return "redirect:/seccion/anuncios2/" + SeccionController.CActivaSeccion.getIdSeccion();
 		}
 		else {
 			boolean flag = dService.grabar(objAnuncio);
 			if(flag)
-				return "redirect:/anuncio/listar";
+				return "redirect:/seccion/anuncios2/" + SeccionController.CActivaSeccion.getIdSeccion();
 			else {
 				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
-				return "redirect:/anuncio/irRegistrar";
+				return "redirect:/seccion/anuncios2/" + SeccionController.CActivaSeccion.getIdSeccion();
 			}
 		}
 	}

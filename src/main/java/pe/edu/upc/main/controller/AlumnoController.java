@@ -42,14 +42,12 @@ public class AlumnoController {
 	private ICursoService cService;
 
 	public static Alumno AlumnoCActiva;
-	//@Autowired
-	//private IAlumno_cursosService cService;
-	
-	//@Autowired
-	//private IPreguntas_SeguridadService pService;
+
 	
 	@RequestMapping("/bienvenido")
-	public String irPaginaBienvenida() {
+	public String irPaginaBienvenida(Model model) {
+		model.addAttribute("alumno",AlumnoCActiva);
+
 		return "menualumno"; //"bienvenido" es una pagina del frontend
 	}
 	
@@ -113,6 +111,28 @@ public class AlumnoController {
 		model.addAttribute("alumno", AlumnoCActiva);
 		return "editarperfilalumno";
 	}
+	@RequestMapping("/modificar")
+	public String editarPerfil(@ModelAttribute Alumno objAlumno, BindingResult binRes, Model model) throws ParseException{
+		if(binRes.hasErrors())
+		{
+			model.addAttribute("listaPreguntas", psService.listar());
+			model.addAttribute("pseguridad", new Preguntas_Seguridad());
+			return "redirect:/alumno/editarperfil";
+		}
+		else {
+			boolean flag = dService.grabar(objAlumno);
+			if(flag)
+			{
+				AlumnoCActiva = objAlumno;
+				return "redirect:/alumno/bienvenido";
+			}
+			else {
+				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
+				return "redirect:/alumno/editarperfil";
+			}
+		}
+	}
+
 	@RequestMapping("/modificar/{id}")
 	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir) throws ParseException{
 		Optional<Alumno> objAlumno = dService.listarId(id);
@@ -199,46 +219,6 @@ public class AlumnoController {
 			else {
 				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
 				return "redirect:/alumno/recuperarcontrasena2";
-			}
-		}
-	}
-
-	@RequestMapping("/cambiocontrasena")
-	public String irPaginacambiocontrasena(Model model) {
-		model.addAttribute("listaPreguntas", psService.listar());
-		model.addAttribute("nuevacontra", new String());
-		model.addAttribute("alumno", new Alumno());
-		return "cambiarContrasenaAlumno";
-	}
-	@RequestMapping("/cambiocontrasena2")
-	public String camcontra1(@ModelAttribute Alumno objAlumno, @ModelAttribute String objNuevaContra, BindingResult binRes, Model model) throws ParseException{
-		if(binRes.hasErrors())
-		{
-			model.addAttribute("listaPreguntas", psService.listar());
-			return "alumno";
-		}
-		else {
-			Alumno alumno = dService.buscarContrasena(objAlumno.getCorreo(),objAlumno.getContrasena()).get(0);
-			System.out.println(alumno.getCorreo());
-			System.out.println(objAlumno.getCorreo());
-			System.out.println(alumno.getContrasena());
-			System.out.println(objAlumno.getContrasena());
-			if(alumno.getCorreo().equals(objAlumno.getCorreo()))
-			{
-				System.out.println(objNuevaContra);
-				objAlumno.setContrasena(objNuevaContra);
-				System.out.println(objAlumno.getContrasena());
-				boolean flag = dService.grabar(objAlumno);
-				if(flag)
-					return "redirect:/alumno/irInicioSesion";
-				else {
-					model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
-					return "redirect:/alumno/cambiocontrasena";
-				}
-			}
-			else {
-				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
-				return "redirect:/alumno/cambiocontrasena";
 			}
 		}
 	}

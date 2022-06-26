@@ -15,7 +15,9 @@ import java.util.List;
 @Repository
 public interface IAlumno_cursosRepository extends JpaRepository<Alumno_cursos, Integer>{
 
-    @Query("from Alumno_cursos ac where ac.Alumno.idAlumno = :alumno")
+    @Query("from Alumno_cursos ac where ac.alumno.idAlumno =:alumno")
     List<Alumno_cursos> seccionesporAlumno(@Param("alumno") int alumno);
+    @Query("from Alumno_cursos ac where ac.alumno.idAlumno =:alumno and ac.seccion.idSeccion =:seccion")
+    List<Alumno_cursos> seccionesporAlumnoySeccion(@Param("alumno") int alumno, @Param("seccion") int seccion);
 
 }

@@ -151,29 +151,33 @@
                 </div>
             </div>
             <br>
+            <form th:action="@{/anuncio/registrar}" th:object="${anuncio}">
             <div class="row mb-5">
-                <div class="col"></div>
-                <div class="col-10 color-verde-claro centrarvh">
-                    <h4 class="mt-2">GENERAR ANUNCIO</h4>
-                    <p class="mt-2 ml-2 color-blanco2 p-2">Ut velit turpis, dignissim scelerisque purus vitae, laoreet elementum lorem. Sed egestas nibh neque, ac consequat tortor mattis ut. Sed ut aliquet sem. In luctus volutpat erat quis lacinia. Duis mattis risus lacinia, pretium dui sed,
-                        interdum massa.</p>
-                    <div class="row">
-                        <div class="col-9"></div>
-                        <div class="col-3 mb-2 dflex align-content-end">
-                            <button type="submit" class="btn btn-block color-azul2 text-dark rounded">PUBLICAR
-                                    </button>
+                    <div class="col"></div>
+                    <div class="col-10 color-verde-claro centrarvh">
+                        <h4 class="mt-2">GENERAR ANUNCIO</h4>
+                        <textarea name="message" rows="5" th:field="*{descripcion}" class="form-control mt-2 ml-2 color-blanco2 p-2" style="border: 0" placeholder="Escriba Anuncio"></textarea>
+
+                        <div class="row">
+                            <div class="col-9"></div>
+                            <div class="col-3 mb-2 dflex align-content-end">
+                                <button type="submit" class="btn btn-block color-azul2 text-dark rounded">PUBLICAR
+                                        </button>
+                            </div>
                         </div>
                     </div>
+                    <div class="col"></div>
                 </div>
-                <div class="col"></div>
-            </div>
+            </form>
+
             <div class="row mb-5">
                 <div class="col"></div>
                 <div class="col-10 centrarvh">
                     <h4 class="mt-2">ANUNCIOS PUBLICADOS</h4>
-                    <div class="container color-verde-claro">
-                        <p class="p-4 text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sem eros, porta tempor vestibulum ut, aliquet ut sapien. Nam sed urna malesuada, consequat leo in, finibus risus. Suspendisse potenti. Maecenas tempus blandit est vel
-                            rutrum. Nulla mollis lacus diam. Sed molestie, arcu quis convallis viverra, leo quam molestie justo, vitae ullamcorper nibh libero nec metus.</p>
+                    <div th:each="a: ${listaAnuncios}">
+                        <div class="container color-verde-claro">
+                            <p class="p-4 text-center" th:text="${a.descripcion}"></p>
+                    </div>
                     </div>
                 </div>
                 <div class="col"></div>

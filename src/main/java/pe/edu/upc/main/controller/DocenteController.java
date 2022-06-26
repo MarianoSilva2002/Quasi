@@ -40,7 +40,9 @@ public class DocenteController {
 	public static Docente DocenteCActiva;
 	
 	@RequestMapping("/bienvenido")
-	public String irPaginaBienvenida() {
+	public String irPaginaBienvenida(Model model) {
+
+		model.addAttribute("docente",DocenteCActiva);
 		return "menudocente"; //"bienvenido" es una pagina del frontend
 	}
 	
@@ -103,6 +105,28 @@ public class DocenteController {
 		model.addAttribute("docente", DocenteCActiva);
 		return "editarperfildocente";
 	}
+	@RequestMapping("/modificar")
+	public String editarPerfil(@ModelAttribute Docente objDocente, BindingResult binRes, Model model) throws ParseException{
+		if(binRes.hasErrors())
+		{
+			model.addAttribute("listaPreguntas", psService.listar());
+			model.addAttribute("pseguridad", new Preguntas_Seguridad());
+			return "redirect:/docente/editarperfil";
+		}
+		else {
+			boolean flag = dService.grabar(objDocente);
+			if(flag)
+			{
+				DocenteCActiva = objDocente;
+				return "redirect:/docente/bienvenido";
+			}
+			else {
+				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
+				return "redirect:/docente/editarperfil";
+			}
+		}
+	}
+
 	@RequestMapping("/modificar/{id}")
 	public String modificar(@PathVariable int id, Model model, RedirectAttributes objRedir) throws ParseException{
 		Optional<Docente> objDocente = dService.listarId(id);
