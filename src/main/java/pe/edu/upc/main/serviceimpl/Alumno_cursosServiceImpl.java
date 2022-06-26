@@ -47,8 +47,8 @@ public class Alumno_cursosServiceImpl implements IAlumno_cursosService {
 	}
 
 	@Override
-	public List<Alumno_cursos> cursosporAlumno(int alumno) {
-		return dAlumno_cursos.cursosporAlumno(alumno);
+	public List<Alumno_cursos> seccionesporAlumno(int alumno) {
+		return dAlumno_cursos.seccionesporAlumno(alumno);
 	}
 
 }

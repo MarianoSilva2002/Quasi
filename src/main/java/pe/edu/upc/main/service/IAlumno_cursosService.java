@@ -11,6 +11,6 @@ public interface IAlumno_cursosService {
 	public void eliminar(int idAlumno_cursos);
 	public Optional<Alumno_cursos> listarId(int idAlumno_cursos);
 	public List<Alumno_cursos> listar();
-	public List<Alumno_cursos> cursosporAlumno(int alumno);
+	public List<Alumno_cursos> seccionesporAlumno(int alumno);
 
 }

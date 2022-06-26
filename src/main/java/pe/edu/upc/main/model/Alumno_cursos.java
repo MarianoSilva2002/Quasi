@@ -22,18 +22,18 @@ public class Alumno_cursos implements Serializable{
 	private Alumno Alumno;
 
 	@ManyToOne
-	@JoinColumn(name="Curso", nullable = true)
-	private Curso Curso;
+	@JoinColumn(name="Seccion", nullable = true)
+	private Seccion Seccion;
 
 	public Alumno_cursos() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Alumno_cursos(int idAlumno_curso, Alumno alumno, Curso curso) {
+	public Alumno_cursos(int idAlumno_curso, Alumno alumno, Seccion seccion) {
 		this.idAlumno_curso = idAlumno_curso;
 		Alumno = alumno;
-		Curso = curso;
+		Seccion = seccion;
 	}
 
 	public int getIdAlumno_curso() {
@@ -52,13 +52,11 @@ public class Alumno_cursos implements Serializable{
 		Alumno = alumno;
 	}
 
-	public pe.edu.upc.main.model.Curso getCurso() {
-		return Curso;
+	public pe.edu.upc.main.model.Seccion getSeccion() {
+		return Seccion;
 	}
 
-	public void setCurso(pe.edu.upc.main.model.Curso curso) {
-		Curso = curso;
+	public void setSeccion(pe.edu.upc.main.model.Seccion seccion) {
+		Seccion = seccion;
 	}
-
-
 }
