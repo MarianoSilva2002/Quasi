@@ -151,30 +151,23 @@
                 </div>
             </div>
             <br>
-            <div class="row mb-5">
-                <div class="col"></div>
-                <div class="col-10 color-verde-claro centrarvh">
-                    <p class="mt-2 ml-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sem eros, porta tempor vestibulum ut, aliquet ut sapien. Nam sed urna malesuada, consequat leo in, finibus risus. Suspendisse potenti. Maecenas tempus blandit est vel rutrum.
+            <div th:each="a: ${listaAnotaciones}">
+                <div class="row mb-5">
+                    <div class="col"></div>
+                    <div class="col-10 color-verde-claro centrarvh">
+                        <p class="mt-2 ml-2" th:text="${a.descripcion}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sem eros, porta tempor vestibulum ut, aliquet ut sapien. Nam sed urna malesuada, consequat leo in, finibus risus. Suspendisse potenti. Maecenas tempus blandit est vel rutrum.
                         Nulla mollis lacus diam. Sed molestie, arcu quis convallis viverra, leo quam molestie justo, vitae ullamcorper nibh libero nec metus.</p>
-                    <p class="justify-content-end dflex">02/04/2022 10:25 am</p>
+                        <p class="justify-content-end dflex" th:text="${a.fechaAnotacion}">02/04/2022 10:25 am</p>
+                    </div>
+                    <div class="col"></div>
                 </div>
-                <div class="col"></div>
-            </div>
-            <div class="row mb-5">
-                <div class="col"></div>
-                <div class="col-10 color-verde-claro centrarvh">
-                    <p class="mt-2 ml-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sem eros, porta tempor vestibulum ut, aliquet ut sapien. Nam sed urna malesuada, consequat leo in, finibus risus. Suspendisse potenti. Maecenas tempus blandit est vel rutrum.
-                        Nulla mollis lacus diam. Sed molestie, arcu quis convallis viverra, leo quam molestie justo, vitae ullamcorper nibh libero nec metus.</p>
-                    <p class="justify-content-end dflex">02/04/2022 10:25 am</p>
-                </div>
-                <div class="col"></div>
             </div>
             <div class="row">
                 <div class="col"></div>
                 <div class="col"></div>
                 <div class="col-3 p-4 dflex align-content-end">
-                    <button type="submit" class="btn btn-block color-celeste text-white rounded">Agregar anotación
-                        </button>
+                    <a th:href="@{'/seccion/agregaranotacion/'} + ${seccion.idSeccion}" class="btn btn-block color-celeste text-white rounded">Agregar anotación
+                        </a>
                 </div>
                 <div class="col-1"></div>
             </div>

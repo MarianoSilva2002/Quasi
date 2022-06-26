@@ -160,22 +160,7 @@
                 </div>
             </div>
             <br>
-            <form th:action="@{/docente/iniciarSesion}" th:object="${docente}" class=" justify-content-center border-0 shadow-none">
-                <div class="row invisible">
-                    <div class="col-3"></div>
-                    <div class="col-md-2 color-celeste pt-3 rounded">
-
-                        <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
-                            <p class="pb-3">Contraseña</p>
-                        </div>
-                    </div>
-                    <div class="col-md-1"></div>
-                    <div class="col-md-3 color-celeste pt-3 rounded">
-                        <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
-                            <input th:field="*{idDocente}" type="text" placeholder="Contraseña..." class="form-control" th:errorclass="'form-control alert-danger'">
-                        </div>
-                    </div>
-                </div>
+            <form th:action="@{/docente/modificar}" th:object="${docente}" class=" justify-content-center border-0 shadow-none">
                 <div class="row">
                     <div class="col-1"></div>
                     <div class="col-md-5 color-azul2 pt-3 rounded">
@@ -238,6 +223,43 @@
                             </button>
                     </div>
                     <div class="col-1"></div>
+                </div>
+                <div class="row invisible">
+                    <div class="col-1 color-celeste pt-3 rounded">
+                        <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
+                            <input th:field="*{idDocente}" type="text" placeholder="Contraseña..." class="form-control" th:errorclass="'form-control alert-danger'">
+                        </div>
+                    </div>
+                    <div class="col-1 color-celeste pt-3 rounded">
+                        <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
+                            <input th:field="*{nombre}" type="text" placeholder="Contraseña..." class="form-control" th:errorclass="'form-control alert-danger'">
+                        </div>
+                    </div>
+                    <div class="col-1 color-celeste pt-3 rounded">
+                        <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
+                            <input th:field="*{aPaterno}" type="text" placeholder="Contraseña..." class="form-control" th:errorclass="'form-control alert-danger'">
+                        </div>
+                    </div>
+                    <div class="col-1 color-celeste pt-3 rounded">
+                        <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
+                            <input th:field="*{aMaterno}" type="text" placeholder="Contraseña..." class="form-control" th:errorclass="'form-control alert-danger'">
+                        </div>
+                    </div>
+                    <div class="col-1 color-celeste pt-3 rounded">
+                        <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
+                            <input th:field="*{contrasena}" type="text" placeholder="Contraseña..." class="form-control" th:errorclass="'form-control alert-danger'">
+                        </div>
+                    </div>
+                    <div class="col-1 color-celeste pt-3 rounded">
+                        <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
+                            <input th:field="*{genero}" type="text" placeholder="Contraseña..." class="form-control" th:errorclass="'form-control alert-danger'">
+                        </div>
+                    </div>
+                    <div class="col-1 color-celeste pt-3 rounded">
+                        <div class="bg-white text-black font-weight-bold rounded pt-2 text-center">
+                            <input th:field="*{especialidad}" type="text" placeholder="Contraseña..." class="form-control" th:errorclass="'form-control alert-danger'">
+                        </div>
+                    </div>
                 </div>
             </form>
 

@@ -136,91 +136,46 @@
 </head>
 
 <body>
-    <div th:replace="fragments/header2 :: header"></div>
+    <div th:replace="fragments/header3 :: header"></div>
+    <br>
+    <br>
 
-    <div class="row py-3">
-        <div class="col"></div>
-        <div class="col dflexcentro">
-            <img class="img-fluid align-middle" th:src="@{/img/Quasi.png}" alt="Logo de Quasi">
+    <div class="row">
+        <div class="col-3 color-azul">
+            <div th:replace="fragments/lateralizqalumno :: header"></div>
         </div>
-        <div class="col"></div>
+        <div class="col-9 pt-5">
+            <div class="row">
+                <div class="centrar font-weight-bold">
+                    <h1>SEMANA 1</h1>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-10 color-verde-claro">
+                    <h4 class="my-4 ml-3 font-weight-bold dflex">DOCUMENTOS TRABAJADOS EN CLASE</h4>
+                    <div class="ml-5 font-weight-bold">
+                        <p>PPT-PROTOTIPOS.PPTX</p>
+                        <p>PROTOTIPOS.DOCX</p>
+                        <p>IMAGEN 1.JPG</p>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-10 color-verde-claro">
+                    <h4 class="my-4 ml-3 font-weight-bold dflex">TRABAJOS POR REALIZAR</h4>
+                    <div class="ml-5 font-weight-bold">
+                        <p>TAREA 1.DOCX</p>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
     </div>
-
-    <br>
-    <br>
-    <form th:action="@{/empleado/iniciarSesion}" th:object="${empleado}" class=" justify-content-center border-0 shadow-none">
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-md-2 color-celeste pt-3 rounded">
-
-                <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
-                    <p class="pb-3">Contraseña</p>
-                </div>
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-3 color-celeste pt-3 rounded">
-                <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
-                    <input th:field="*{correo}" type="text" placeholder="Contraseña..." class="form-control" name="uname" required>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-md-2 color-celeste pt-3 rounded">
-
-                <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
-                    <p class="pb-3">Nueva contraseña</p>
-                </div>
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-3 color-celeste pt-3 rounded">
-                <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
-                    <input th:field="*{correo}" type="text" placeholder="Pregunta de seguridad..." class="form-control" name="uname" required>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-md-2 color-celeste pt-3 rounded">
-
-                <div class="bg-white text-black font-weight-bold rounded pt-3 text-center">
-                    <p class="pb-3">Confirmar nueva contraseña</p>
-                </div>
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-3 color-celeste pt-3 rounded">
-                <div class="bg-white text-black font-weight-bold rounded p-1 text-center">
-                    <input th:field="*{contrasena}" type="text" id="confirm_password" placeholder="Inserte Contraseña..." class="form-control" required>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-9">
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                      <input class="form-check-input" type="checkbox" name="remember" required> Desvincular cuenta de otros dispositivos
-                      <div class="valid-feedback">Válido.</div>
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col"></div>
-            <div class="col-3 p-4 dflexcentro">
-                <button type="submit" class="btn btn-block color-azul-oscuro text-white rounded">Cambiar
-                    </button>
-            </div>
-            <div class="col"></div>
-        </div>
-    </form>
-
-    <br>
-    <br>
     <div th:replace="fragments/footer :: footer"></div>
 </body>
 

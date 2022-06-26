@@ -45,5 +45,10 @@ public class AnuncioServiceImpl implements IAnuncioService{
 	public List<Anuncio> listar() {
 		return dAnuncio.findAll();
 	}
-	
+
+	@Override
+	public List<Anuncio> anunciosporSeccion(int idSeccion) {
+		return dAnuncio.anunciosporSeccion(idSeccion);
+	}
+
 }

@@ -142,7 +142,7 @@
 
     <div class="row py-5 color-verde-claro">
         <div class="col dflexcentro centrarv">
-            <h1 class="font-weight-bold">Bienvenido (usuario)</h1>
+            <h1 class="font-weight-bold">Bienvenido <span th:text="${alumno.nombre}"></span> <span th:text="${alumno.aPaterno}"></span></h1>
         </div>
         <div class="col dflexcentro">
             <img class="img-fluid align-middle" th:src="@{/img/Quasi.png}" alt="Logo de Quasi">
@@ -157,24 +157,12 @@
                 </a>
             </div>
             <div class="col">
-                <a href="" class="color-azul dflexcentro py-2">
-                    <h4 class="pt-3 text-dark font-weight-bold">Anuncios</h4>
+                <a th:href="@{/alumno/cursos}" class="color-azul dflexcentro py-2">
+                    <h4 class="pt-3 text-dark font-weight-bold">Tus Cursos</h4>
                 </a>
             </div>
         </div>
         <br>
-        <div class="row">
-            <div class="col">
-                <a href="" class="color-azul dflexcentro py-2">
-                    <h4 class="pt-3 text-dark font-weight-bold">Tus Cursos</h4>
-                </a>
-            </div>
-            <div class="col">
-                <a href="" class="color-azul dflexcentro py-2">
-                    <h4 class="pt-3 text-dark font-weight-bold">Calificaciones</h4>
-                </a>
-            </div>
-        </div>
     </div>
 
     <br>

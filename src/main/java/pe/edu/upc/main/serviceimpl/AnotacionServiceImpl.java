@@ -45,5 +45,10 @@ public class AnotacionServiceImpl implements IAnotacionService {
 	public List<Anotacion> listar() {
 		return dAnotacion.findAll();
 	}
-	
+
+	@Override
+	public List<Anotacion> anotacionporAlumno(int idAlumno) {
+		return dAnotacion.anotacionporAlumno(idAlumno);
+	}
+
 }

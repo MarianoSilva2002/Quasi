@@ -3,17 +3,7 @@ package pe.edu.upc.main.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -26,44 +16,36 @@ public class Anuncio implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idAnuncio;
 	
-	@NotEmpty(message="El nombre del anuncio es necesario")
-	@Column(name="Nombre", nullable = false, length = 60)
-	private String Nombre;
-	
 	@NotEmpty(message="La descripcion del anuncio es necesario")
 	@Column(name="Descripcion", nullable = false, length = 200)
 	private String Descripcion;
 	
-	@NotEmpty(message="La fecha del anuncio es necesaria")
 	@Column(name="Fechaanuncio", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date Fechaanuncio;
 	
-	@NotEmpty(message="La hora del anuncio es necesaria")
 	@Column(name="Horaanuncio", nullable = false)
 	@Temporal(TemporalType.TIME)
 	private Date Horaanuncio;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="idcurso")
-	private Curso idcurso;
+	private Seccion idseccion;
 
 	public Anuncio() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Anuncio(int idAnuncio, @NotEmpty(message = "El nombre del anuncio es necesario") String nombre,
-			@NotEmpty(message = "La descripcion del anuncio es necesario") String descripcion,
-			@NotEmpty(message = "La fecha del anuncio es necesaria") Date fechaanuncio,
-			@NotEmpty(message = "La hora del anuncio es necesaria") Date horaanuncio, Curso idcurso) {
+	public Anuncio(int idAnuncio,
+			@NotEmpty(message = "La descripcion del anuncio es necesario") String descripcion, Date fechaanuncio,
+			 Date horaanuncio, Seccion idseccion) {
 		super();
 		this.idAnuncio = idAnuncio;
-		Nombre = nombre;
 		Descripcion = descripcion;
 		Fechaanuncio = fechaanuncio;
 		Horaanuncio = horaanuncio;
-		this.idcurso = idcurso;
+		this.idseccion = idseccion;
 	}
 
 	public int getIdAnuncio() {
@@ -72,14 +54,6 @@ public class Anuncio implements Serializable{
 
 	public void setIdAnuncio(int idAnuncio) {
 		this.idAnuncio = idAnuncio;
-	}
-
-	public String getNombre() {
-		return Nombre;
-	}
-
-	public void setNombre(String nombre) {
-		Nombre = nombre;
 	}
 
 	public String getDescripcion() {
@@ -106,13 +80,11 @@ public class Anuncio implements Serializable{
 		Horaanuncio = horaanuncio;
 	}
 
-	public Curso getIdcurso() {
-		return idcurso;
+	public Seccion getIdseccion() {
+		return idseccion;
 	}
 
-	public void setIdcurso(Curso idcurso) {
-		this.idcurso = idcurso;
+	public void setIdseccion(Seccion idseccion) {
+		this.idseccion = idseccion;
 	}
-
-	
 }

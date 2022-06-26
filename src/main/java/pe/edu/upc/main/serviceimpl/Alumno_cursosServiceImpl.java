@@ -51,4 +51,9 @@ public class Alumno_cursosServiceImpl implements IAlumno_cursosService {
 		return dAlumno_cursos.seccionesporAlumno(alumno);
 	}
 
+	@Override
+	public List<Alumno_cursos> seccionesporAlumnoySeccion(int alumno, int seccion) {
+		return dAlumno_cursos.seccionesporAlumnoySeccion(alumno,seccion);
+	}
+
 }
