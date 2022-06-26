@@ -216,7 +216,10 @@ public class SeccionController {
 			model.addAttribute("seccion",objSeccion.get());
 			model.addAttribute("curso",objSeccion.get().getIdcurso());
 			model.addAttribute("listaAnuncios",listaAnuncios);
-			return "anunciosalumno";
+			if(listaAnuncios != null)
+				return "anunciosalumno";
+			else
+				return "anunciosalumno2";
 		}
 	}
 
