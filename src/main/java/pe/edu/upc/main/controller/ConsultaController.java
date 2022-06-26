@@ -61,7 +61,7 @@ public class ConsultaController {
 		else {
 			boolean flag = dService.grabar(objConsulta);
 			if(flag)
-				return "redirect:/seccion/consulta1/" + Alumno_CursosController.CActivaAlumnoCurso.getSeccion().getIdSeccion();
+				return "redirect:/seccion/consultas1/" + Alumno_CursosController.CActivaAlumnoCurso.getSeccion().getIdSeccion();
 			else {
 				model.addAttribute("mensaje", "Ocurrio un accidente, LUZ ROJA");
 				return "redirect:/seccion/agregarconsulta/" + Alumno_CursosController.CActivaAlumnoCurso.getSeccion().getIdSeccion();
